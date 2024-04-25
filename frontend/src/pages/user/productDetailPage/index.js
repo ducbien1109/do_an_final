@@ -10,8 +10,8 @@ import { CartContext } from "@Theme/masterLayout";
 import { ScrollToTop } from '@Utils';
 import { API, BREADCRUMB, MESSAGE, PRODUCT_DETAIL_PAGE } from "@Const";
 import NotFoundPage from "../../error/notFoundPage";
-import Comments from "./Comments/Comments";
-import AddComment from "./Comments/Addcomment";
+import Comments from "../Comments/Comments";
+import AddComment from "../Comments/Addcomment";
 
 const ProductDetailPage = () => {
   const cartContext = useContext(CartContext);

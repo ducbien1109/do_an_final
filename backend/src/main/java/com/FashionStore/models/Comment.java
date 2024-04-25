@@ -20,14 +20,23 @@ public class Comment {
     @Column(name = "created_at")
     private String createdAt;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product productID;
+
+    @Column(name = "detete")
+    private boolean detete;
+
     public Comment() {
     }
 
-    public Comment(Long commentID, String content, Users userID, String createdAt) {
+    public Comment(Long commentID, String content, Users userID, String createdAt, Product productID, boolean detete) {
         this.commentID = commentID;
         this.content = content;
         this.userID = userID;
         this.createdAt = createdAt;
+        this.productID = productID;
+        this.detete = detete;
     }
 
     public Long getCommentID() {
@@ -60,5 +69,21 @@ public class Comment {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Product getProductID() {
+        return productID;
+    }
+
+    public void setProductID(Product productID) {
+        this.productID = productID;
+    }
+
+    public boolean isDetete() {
+        return detete;
+    }
+
+    public void setDetete(boolean detete) {
+        this.detete = detete;
     }
 }

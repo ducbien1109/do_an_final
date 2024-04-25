@@ -711,6 +711,8 @@ export const API = {
     GET_ALL_PRODUCTS: "/api/public/get-all-products",
     ADD_COMMENT: "/api/public/add-comment",
     GET_COMMENT: "/api/public/get-comment",
+    DELETE_COMMENT: "/api/public/delete-comment",
+    EDIT_COMMENT: "/api/public/edit-comment",
   },
   ADMIN: {
     EDIT_USER: "/api/admin/edit-user",

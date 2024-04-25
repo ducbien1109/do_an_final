@@ -1,8 +1,10 @@
 package com.FashionStore.controllers;
 
 import com.FashionStore.models.Comment;
+import com.FashionStore.models.Product;
 import com.FashionStore.models.Users;
 import com.FashionStore.repositories.CommentRepository;
+import com.FashionStore.repositories.ProductRepository;
 import com.FashionStore.repositories.UsersRepository;
 import com.FashionStore.security.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("${api.base-path}")
@@ -26,9 +29,12 @@ public class CommentController {
     private UsersRepository usersRepository;
 
     @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
     private CommentRepository commentRepository;
 
-    @Value("${param.content}")
+    @Value("${comment.param.content}")
     private String contents;
 
     @Value("${header.authorization}")
@@ -36,6 +42,16 @@ public class CommentController {
 
     @Value("${authorization.bearer}")
     private String authorizationBearer;
+
+    @Value("${comment.param.userID}")
+    private String usersID;
+
+    @Value("${param.productID}")
+    private String PARAM_PRODUCT_ID;
+
+    @Value("${comment.param.commentID}")
+    private String COMMENT_ID;
+
     @PostMapping("${endpoint.public.add.comment}")
     public ResponseEntity<?> addComment(HttpServletRequest request) {
         String accessToken = request.getHeader("Authorization");
@@ -50,17 +66,20 @@ public class CommentController {
         Date commentDate = new Date();
         commentDate.setTime(commentDate.getTime());
 
+        Long productID = Long.valueOf(request.getParameter("productID"));
+        Product product = productRepository.findProductByProductID(productID);
         Users user = usersRepository.findUsersByEmail(email);
-        Users users = usersRepository.findUsersByUserID(user.getUserID());
-        Long userID = users.getUserID();
-        if (user == null || !Objects.equals(user.getUserID(), userID)) {
+        if (user == null || !Objects.equals(user.getUserID(), user.getUserID())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
+        String.valueOf(request.getParameter(content));
         Comment comment = new Comment();
         comment.setUserID(user);
         comment.setContent(content);
         comment.setCreatedAt(String.valueOf(commentDate));
+        comment.setProductID(product);
+        comment.setDetete(false);
 
         commentRepository.save(comment);
 
@@ -73,9 +92,66 @@ public class CommentController {
         if (!jwtTokenUtil.isTokenValid(accessToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-        List<Comment> comments = commentRepository.findAll();
-
+        Long productID = Long.valueOf(request.getParameter("productID"));
+        Product product = productRepository.findProductByProductID(Long.valueOf(productID));
+        List<Comment> comments = commentRepository.findByProductID(product);
         return ResponseEntity.ok(comments);
+    }
+
+    @PostMapping("${endpoint.public.delete-comment}")
+    public ResponseEntity<?> deleteComment(HttpServletRequest request) {
+        try {
+            String accessToken = request.getHeader(headerAuthorization);
+            accessToken = accessToken.replace(authorizationBearer, "");
+            if (!jwtTokenUtil.isTokenValid(accessToken)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            String email = jwtTokenUtil.getEmailFromToken(accessToken);
+            boolean isAdmin = usersRepository.findUsersByEmail(email).getIsAdmin();
+            Long commentId = Long.valueOf(request.getParameter(COMMENT_ID));
+            Optional<Comment> commentOptional = commentRepository.findById(commentId);
+            if (!commentOptional.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            Comment comment = commentOptional.get();
+            if (!isAdmin && !Objects.equals(comment.getUserID().getEmail(), email)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            commentRepository.delete(comment);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @PostMapping("${endpoint.public.edit-comment}")
+    public ResponseEntity<?> editComment(HttpServletRequest request) {
+        try {
+            String accessToken = request.getHeader(headerAuthorization);
+            accessToken = accessToken.replace(authorizationBearer, "");
+            if (!jwtTokenUtil.isTokenValid(accessToken)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            String email = jwtTokenUtil.getEmailFromToken(accessToken);
+            boolean isAdmin = usersRepository.findUsersByEmail(email).getIsAdmin();
+            Long commentId = Long.valueOf(request.getParameter(COMMENT_ID));
+            Optional<Comment> commentOptional = commentRepository.findById(commentId);
+            if (!commentOptional.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            Comment comment = commentOptional.get();
+            if (!isAdmin && !Objects.equals(comment.getUserID().getEmail(), email)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
+            String content = "âdsfasafsa";
+            comment.setContent(content);
+            commentRepository.save(comment);
+
+            return ResponseEntity.ok(comment);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

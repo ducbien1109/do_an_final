@@ -37,6 +37,7 @@ const AddComment = ({ onAddComment }) => {
                 // onAddComment();
                 // Reset trường nội dung comment sau khi gửi
                 setContent('');
+                window.location.reload();
             } else {
                 const data = await response.json();
                 toast.error(data.message);

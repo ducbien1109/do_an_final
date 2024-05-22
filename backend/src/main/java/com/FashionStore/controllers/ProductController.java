@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.Normalizer;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -322,6 +323,7 @@ public class ProductController {
             return ResponseEntity.ok(product);
         }
     }
+
 
     public Product getProductDetails(Long productID) {
         Product product = productRepository.findProductByProductID(productID);

@@ -37,6 +37,10 @@ const items = [
     getItem(<span style={{margin: "0 7px 0 7px"}}>{MANAGEMENT_PAGE.ACCOUNT_MANAGEMENT.SUB.ACCOUNT_LIST}</span>,  ROUTERS.ADMIN.ACCOUNT_LIST),
     getItem(<span style={{margin: "0 7px 0 7px"}}>{MANAGEMENT_PAGE.ACCOUNT_MANAGEMENT.SUB.ADD_ACCOUNT}</span>,  ROUTERS.ADMIN.ADD_ACCOUNT),
   ]),
+  getItem(MANAGEMENT_PAGE.COMMENT_MANAGEMENT.LABEL, MANAGEMENT_PAGE.COMMENT_MANAGEMENT.KEY, <FaRegUser style={{fontSize:"18px", marginBottom:"1px"}}/>, [
+    getItem(<span style={{margin: "0 7px 0 7px"}}>{MANAGEMENT_PAGE.COMMENT_MANAGEMENT.SUB.COMMENT_LIST}</span>,  ROUTERS.ADMIN.COMMENT_LIST),
+    getItem(<span style={{margin: "0 7px 0 7px"}}>{MANAGEMENT_PAGE.COMMENT_MANAGEMENT.SUB.ADD_COMMENT}</span>,  ROUTERS.ADMIN.ADD_COMMENT),
+  ]),
 ];
 
 const NavigationMenu = () => {
@@ -78,7 +82,6 @@ const NavigationMenu = () => {
       state: { scrolling: SCROLLING.SMOOTH },
     });
   }
-
   const onOpenChange = (e) => {
     setOpenKeys(e);
   }

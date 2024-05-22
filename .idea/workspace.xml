@@ -5,38 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39072da5-8cde-4410-8270-93547e5bf014" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/FashionStoreApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/FashionStoreApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/AddressController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/DTO/OrdersDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/DTO/PaymentRestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/DTO/TransactionStatusDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/DTO/infoPaymentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/config/Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/config/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/PaymentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/PaymentNavigate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/StoreInformationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/StoreInformationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductQuantity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductQuantity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ProductSize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ResponseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/ResponseObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/controllers/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Orders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/models/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/AddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductCategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductImageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductQuantityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductQuantityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductSizeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/ProductSizeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/repositories/UsersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/security/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/security/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/security/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/security/JwtTokenUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/security/JwtUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/FashionStore/security/JwtUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/FashionStore/FashionStoreApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/FashionStore/FashionStoreApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/productManagement/components/ProductDetails/ProductDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/productManagement/components/ProductDetails/ProductDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/salesManagement/salesProductQuantityStatistics/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/salesManagement/salesProductQuantityStatistics/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dialogs/LoginDialog/LoginDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dialogs/LoginDialog/LoginDialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/components/NavigationMenu/NavigationMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/components/NavigationMenu/NavigationMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/utils/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/managementPage/utils/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/Comments/Addcomment.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/Comments/Addcomment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/Comments/Comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/Comments/Comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/Comments/Editcomment.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/Comments/Editcomment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/cartPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/cartPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/checkoutPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/checkoutPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/profilePage/profileOrdersPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/profilePage/profileOrdersPage/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/utils/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/const.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/JRDfz1R.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,21 +55,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tiendzung/Project/Fashion-Store&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/báo cáo đồ án/moi/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

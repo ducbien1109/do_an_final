@@ -131,16 +131,16 @@ public class AuthController {
         Users user = (findByEmail != null) ? findByEmail : findByPhoneNumber;
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        if (!passwordEncoder.matches(plainPassword, user.getHashedPassword())) {
+        if (passwordEncoder.matches(plainPassword, user.getHashedPassword()) || passwordEncoder.matches(plainPassword, user.getForgotPassword())) {
+            String accessToken = jwtTokenUtil.generateAccessToken(email);
+
+            Map<String, String> tokens = new HashMap<>();
+            tokens.put(TOKEN_ACCESS, accessToken);
+
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(HttpStatus.OK.toString(), LOGIN_SUCCESS, tokens));
+        } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(LOGIN_FAILED);
         }
-
-        String accessToken = jwtTokenUtil.generateAccessToken(email);
-
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put(TOKEN_ACCESS, accessToken);
-
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(HttpStatus.OK.toString(), LOGIN_SUCCESS, tokens));
     }
 
     @PostMapping("${endpoint.public.register}")

@@ -14,10 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("${api.base-path}")
@@ -92,9 +89,15 @@ public class CommentController {
         if (!jwtTokenUtil.isTokenValid(accessToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        Long productID = Long.valueOf(request.getParameter("productID"));
-        Product product = productRepository.findProductByProductID(Long.valueOf(productID));
-        List<Comment> comments = commentRepository.findByProductID(product);
+        List<Comment> comments = new ArrayList<>();
+        if (request.getParameter("productID") != null) {
+            Long productID = Long.valueOf(request.getParameter("productID"));
+            Product product = productRepository.findProductByProductID(Long.valueOf(productID));
+            comments = commentRepository.findByProductID(product);
+        } else {
+            comments = commentRepository.findAll();
+        }
+
         return ResponseEntity.ok(comments);
     }
 
@@ -144,8 +147,7 @@ public class CommentController {
             if (!isAdmin && !Objects.equals(comment.getUserID().getEmail(), email)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
-
-            String content = "âdsfasafsa";
+            String content = request.getParameter(contents);
             comment.setContent(content);
             commentRepository.save(comment);
 

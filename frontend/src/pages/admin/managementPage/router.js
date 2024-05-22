@@ -7,6 +7,8 @@ import ListOfProductsAndCategoriesPage from "./productManagement/listOfProductsA
 import EditBannerPage from "./webpageManagement/editBanner";
 import AccountListPage from "./accountManagement/accountList";
 import AddAccountPage from "./accountManagement/addAccount";
+import AddComment from "./commentManagement/addComment";
+import CommentList from "./commentManagement/commentList";
 import OrderListPage from "./salesManagement/orderList";
 import StoreInformationPage from "./webpageManagement/storeInformation";
 import SalesProductQuantityStatisticsPage from "./salesManagement/salesProductQuantityStatistics";
@@ -48,6 +50,14 @@ const renderCustom = () => {
         {
             path: ROUTERS.ADMIN.SALES_PRODUCT_QUANTITY_STATISTICS,
             component: <SalesProductQuantityStatisticsPage />
+        },
+        {
+            path: ROUTERS.ADMIN.COMMENT_LIST,
+            component: <CommentList />
+        },
+        {
+            path: ROUTERS.ADMIN.ADD_COMMENT,
+            component: <AddComment />
         }
     ]
 

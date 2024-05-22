@@ -20,7 +20,7 @@ const EditComment = ({ comment, onSave, onCancel }) => {
         try {
             const formData = new FormData();
             formData.append('commentID', comment);
-            formData.append('contents', editedContent);
+            formData.append('content', editedContent);
             const url = API.PUBLIC.EDIT_COMMENT;
             const response = await fetch(url, {
                 method: 'POST',
@@ -39,7 +39,7 @@ const EditComment = ({ comment, onSave, onCancel }) => {
                 toast.error(data.message);
             }
         } catch (error) {
-            toast.error(MESSAGE.DB_CONNECTION_ERROR);
+            window.location.reload();
         }
     };
 

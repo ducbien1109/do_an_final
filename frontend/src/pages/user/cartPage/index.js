@@ -1,18 +1,18 @@
-import React, {useContext, useEffect, useState} from "react"
-import {useCookies} from "react-cookie";
-import {toast} from "react-toastify";
+import React, { useContext, useEffect, useState } from "react"
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 
 import "./style.scss"
 import "./css/cart.css";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cardIcon from "./images/card.svg"
 import cod from "./images/cod.svg"
-import {formatter} from "@Utils/formatter.js"
+import { formatter } from "@Utils/formatter.js"
 import CartProduct from "./CartProductSection/CartProductSection"
 import AddressSection from "../components/AddressSection/AddressSection";
-import {CartContext} from "@Theme/masterLayout";
-import {ScrollToTop} from '@Utils';
-import {API, BREADCRUMB, CART_PAGE, ERROR, IMAGE_URL, MESSAGE} from "@Const";
+import { CartContext } from "@Theme/masterLayout";
+import { ScrollToTop } from '@Utils';
+import { API, BREADCRUMB, CART_PAGE, ERROR, IMAGE_URL, MESSAGE } from "@Const";
 
 const productListFake = [
   {
@@ -39,7 +39,7 @@ function CartPage() {
   const navigate = useNavigate();
 
   const [numberProduct, setNumberProduct] = useState(0)
-  const [selectedAddress, setSelectedAddress] = useState({a:1})
+  const [selectedAddress, setSelectedAddress] = useState({ a: 1 })
   // const [review, setReview] = useState(false);
 
   const [userID, setUserID] = useState(null);
@@ -76,19 +76,19 @@ function CartPage() {
           'Authorization': `Bearer ${accessToken}`,
         },
       })
-          .then((response) => {
-            if (response.ok) {
-              // Yêu cầu đã được xử lý thành công, bạn có thể thực hiện các thao tác khác (hoặc không cần làm gì)
-            } else {
-              toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
-              navigate('/');
-              throw new Error(ERROR.CART_UPDATE_ERROR);
-            }
-          })
-          .catch((error) => {
-            console.error('Lỗi:', error);
-            // Có thể hiển thị thông báo lỗi cho người dùng ở đây
-          });
+        .then((response) => {
+          if (response.ok) {
+            // Yêu cầu đã được xử lý thành công, bạn có thể thực hiện các thao tác khác (hoặc không cần làm gì)
+          } else {
+            toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
+            navigate('/');
+            throw new Error(ERROR.CART_UPDATE_ERROR);
+          }
+        })
+        .catch((error) => {
+          console.error('Lỗi:', error);
+          // Có thể hiển thị thông báo lỗi cho người dùng ở đây
+        });
     } else {
       toast.warn(MESSAGE.INSUFFICIENT_QUANTITY);
     }
@@ -118,20 +118,20 @@ function CartPage() {
 
     fetch(API.PUBLIC.EDIT_PRODUCT_IN_CART_ENDPOINT, {
       method: 'POST',
-      headers: {"Authorization" : "Bearer " + accessToken},
+      headers: { "Authorization": "Bearer " + accessToken },
       body: formData,
     })
-        .then((response) => {
-          if (response.ok) {
-          } else {
-            toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
-            navigate('/');
-            throw new Error(ERROR.CART_UPDATE_ERROR);
-          }
-        })
-        .catch((error) => {
-          console.error('Lỗi:', error);
-        });
+      .then((response) => {
+        if (response.ok) {
+        } else {
+          toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
+          navigate('/');
+          throw new Error(ERROR.CART_UPDATE_ERROR);
+        }
+      })
+      .catch((error) => {
+        console.error('Lỗi:', error);
+      });
   };
 
   const handleCloseButton = (id) => {
@@ -140,22 +140,22 @@ function CartPage() {
 
     fetch(API.PUBLIC.DELETE_PRODUCT_IN_CART_ENDPOINT, {
       method: 'POST',
-      headers: {"Authorization" : "Bearer " + accessToken},
+      headers: { "Authorization": "Bearer " + accessToken },
       body: formData,
     })
-        .then((response) => {
-          if (response.ok) {
-            setNumberProduct(numberProduct-1);
-            cartContext.getAmountInCart().then(r => r);
-          } else {
-            toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
-            navigate('/');
-            throw new Error(ERROR.CART_ITEM_REMOVAL_ERROR);
-          }
-        })
-        .catch((error) => {
-          console.error('Lỗi:', error);
-        });
+      .then((response) => {
+        if (response.ok) {
+          setNumberProduct(numberProduct - 1);
+          cartContext.getAmountInCart().then(r => r);
+        } else {
+          toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
+          navigate('/');
+          throw new Error(ERROR.CART_ITEM_REMOVAL_ERROR);
+        }
+      })
+      .catch((error) => {
+        console.error('Lỗi:', error);
+      });
   };
 
   const handleChooseSize = (sizeID, id) => {
@@ -184,20 +184,20 @@ function CartPage() {
 
     fetch(API.PUBLIC.EDIT_PRODUCT_IN_CART_ENDPOINT, {
       method: 'POST',
-      headers: {"Authorization" : "Bearer " + accessToken},
+      headers: { "Authorization": "Bearer " + accessToken },
       body: formData,
     })
-        .then((response) => {
-          if (response.ok) {
-          } else {
-            toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
-            navigate('/');
-            throw new Error(ERROR.CART_UPDATE_ERROR);
-          }
-        })
-        .catch((error) => {
-          console.error('Lỗi:', error);
-        });
+      .then((response) => {
+        if (response.ok) {
+        } else {
+          toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
+          navigate('/');
+          throw new Error(ERROR.CART_UPDATE_ERROR);
+        }
+      })
+      .catch((error) => {
+        console.error('Lỗi:', error);
+      });
   }
 
   const calcTotalPrice = () => {
@@ -224,15 +224,15 @@ function CartPage() {
     let review = false;
 
     product.map((product, index) => {
-          if (product.informationProduct.productSizes) {
-              let stockQuantity = product.informationProduct.productQuantities.find((quantity) => quantity.sizeID === product.sizeID).quantity;
-              if (stockQuantity < product.quantityPurchase) {
-                handleDecreaseAmount(index, product.quantityPurchase - stockQuantity);
-                review = true;
-                // console.log("cuu");
-              }
-          }
+      if (product.informationProduct.productSizes) {
+        let stockQuantity = product.informationProduct.productQuantities.find((quantity) => quantity.sizeID === product.sizeID).quantity;
+        if (stockQuantity < product.quantityPurchase) {
+          handleDecreaseAmount(index, product.quantityPurchase - stockQuantity);
+          review = true;
+          // console.log("cuu");
+        }
       }
+    }
     )
 
     if (review === true) {
@@ -248,34 +248,34 @@ function CartPage() {
 
     fetch(API.PUBLIC.ADD_ORDERS_BY_CART_ENDPOINT, {
       method: 'POST',
-      headers: {"Authorization": "Bearer " + accessToken},
+      headers: { "Authorization": "Bearer " + accessToken },
       body: formData,
     })
-        .then((response) => {
-          if (response.ok) {
-            cartContext.getAmountInCart().then(r => r);
-            toast.success(MESSAGE.ORDER_PLACED_SUCCESS);
-            navigateOrdersWithUserID().then(r => {});
-            return response.json();
-          } else {
-            toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
-            navigate('/');
-            throw new Error(MESSAGE.ORDER_PLACEMENT_ERROR);
-          }
-        })
-        .then((data) => {
-          // console.log(data);
-        })
-        .catch((error) => {
-          console.error('Lỗi:', error);
-        });
+      .then((response) => {
+        if (response.ok) {
+          cartContext.getAmountInCart().then(r => r);
+          toast.success(MESSAGE.ORDER_PLACED_SUCCESS);
+          navigateOrdersWithUserID().then(r => { });
+          return response.json();
+        } else {
+          toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
+          navigate('/');
+          throw new Error(MESSAGE.ORDER_PLACEMENT_ERROR);
+        }
+      })
+      .then((data) => {
+        // console.log(data);
+      })
+      .catch((error) => {
+        console.error('Lỗi:', error);
+      });
   }
 
   const fetchData = async () => {
     try {
       const response = await fetch(API.PUBLIC.GET_CART_ENDPOINT, {
         method: 'GET',
-        headers: {"Authorization" : "Bearer " + accessToken},
+        headers: { "Authorization": "Bearer " + accessToken },
       });
 
       if (response.ok) {
@@ -336,112 +336,112 @@ function CartPage() {
   }
 
   useEffect(() => {
-    fetchData().then(r => {});
+    fetchData().then(r => { });
   }, [numberProduct]);
 
   return (
-      <main id ="main-checkout" style={{paddingBottom:"30px"}}>
-        <ScrollToTop />
-        <section className="cart__wrapper container">
-          <nav style={{"--bs-breadcrumb-divider": "none"}} aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item"><Link to ="/"> {BREADCRUMB.HOME_PAGE} </Link></li>
-              <li className="breadcrumb-item"> &gt;</li>
-              <li className="breadcrumb-item active" aria-current="page">{BREADCRUMB.SHOPPING_CART} ({numberProduct})</li>
-            </ol>
-          </nav>
+    <main id="main-checkout" style={{ paddingBottom: "30px" }}>
+      <ScrollToTop />
+      <section className="cart__wrapper container">
+        <nav style={{ "--bs-breadcrumb-divider": "none" }} aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item"><Link to="/"> {BREADCRUMB.HOME_PAGE} </Link></li>
+            <li className="breadcrumb-item"> &gt;</li>
+            <li className="breadcrumb-item active" aria-current="page">{BREADCRUMB.SHOPPING_CART} ({numberProduct})</li>
+          </ol>
+        </nav>
 
-          { !product.length ?
-              <div className="cart-empty" style={{minHeight:"450px", margin:"0"}}>
-                <div className="cart-empty__img">
-                  <img src={IMAGE_URL.EMPTY_PRODUCT_IMG} alt="no data"/>
-                  <p>{CART_PAGE.EMPTY_CART_MESSAGE}</p>
-                </div>
-                <div className="cart-empty__action">
-                  <a href="/" type="button" className="btn btn-danger cart__bill__total">
-                    <span>{CART_PAGE.BUY_NOW}</span>
-                  </a>
-                </div>
+        {!product.length ?
+          <div className="cart-empty" style={{ minHeight: "450px", margin: "0" }}>
+            <div className="cart-empty__img">
+              <img src={IMAGE_URL.EMPTY_PRODUCT_IMG} alt="no data" />
+              <p>{CART_PAGE.EMPTY_CART_MESSAGE}</p>
+            </div>
+            <div className="cart-empty__action">
+              <a href="/" type="button" className="btn btn-danger cart__bill__total">
+                <span>{CART_PAGE.BUY_NOW}</span>
+              </a>
+            </div>
+          </div>
+          :
+          <div className="content-page">
+            <div className="row">
+              <div className="left-content col-xl-8 col-lg-8 col-md-6 col-12">
+                {product.map((product, index) => (
+                  <CartProduct
+                    key={index}
+                    product={product}
+                    handleDecreaseAmount={(amount) => handleDecreaseAmount(index, amount)}
+                    handleIncreaseAmount={() => handleIncreaseAmount(index)}
+                    handleChooseSize={(sizeID) => handleChooseSize(sizeID, index)}
+                    handleCloseButton={() => handleCloseButton(index)}
+                  />
+                ))}
+
               </div>
-              :
-              <div className="content-page">
-                <div className="row">
-                  <div className="left-content col-xl-8 col-lg-8 col-md-6 col-12">
-                    {product.map((product, index) => (
-                        <CartProduct
-                            key={index}
-                            product={product}
-                            handleDecreaseAmount={(amount) => handleDecreaseAmount(index, amount)}
-                            handleIncreaseAmount={() => handleIncreaseAmount(index)}
-                            handleChooseSize={(sizeID) => handleChooseSize(sizeID, index)}
-                            handleCloseButton={() => handleCloseButton(index)}
-                        />
-                    ))}
+              <div className="right-content col-xl-4 col-lg-4 col-md-6 col-12">
+                <AddressSection selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
 
+                <div className="cart__address">
+                  <div className="cart__address__title d-flex align-items-center justify-content-between">
+                    <div className="cart__address__title__left mb-20px">
+                      <img src={cardIcon} alt="icon payment method" />
+                      <h5 className="mb-0">{CART_PAGE.PAYMENT_METHOD}</h5>
+                    </div>
                   </div>
-                  <div className="right-content col-xl-4 col-lg-4 col-md-6 col-12">
-                    <AddressSection selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress}/>
-
-                    <div className="cart__address">
-                      <div className="cart__address__title d-flex align-items-center justify-content-between">
-                        <div className="cart__address__title__left mb-20px">
-                          <img src={cardIcon} alt="icon payment method" />
-                          <h5 className="mb-0">{CART_PAGE.PAYMENT_METHOD}</h5>
-                        </div>
+                  <div className="list-payment-method">
+                    <div className="item-method d-flex justify-content-start align-items-center" style={{ cursor: "default" }}>
+                      <div className="image-method" style={{ marginLeft: "20px" }}>
+                        <img src={cod} width="24" height="22" alt="icon payment method cod" />
                       </div>
-                      <div className="list-payment-method">
-                        <div className="item-method d-flex justify-content-start align-items-center" style={{cursor:"default"}}>
-                          <div className="image-method" style={{marginLeft:"20px"}}>
-                            <img src={cod} width="24" height="22" alt="icon payment method cod" />
-                          </div>
-                          <div className="cart__address__description pdr-76px">
-                            <div className="fw-bold">{CART_PAGE.COD}</div>
-                            <div className="font-12 ">{CART_PAGE.CASH_ON_DELIVERY}</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="cart__bill position-relative">
-                        <div className="row me-0 ms-0">
-                          <div className="col-6 cart__bill--mb">
-                            <div className="cart__bill__ml cart__bill__title">{CART_PAGE.SUBTOTAL}</div>
-                          </div>
-                          <div className="col-6 cart__bill--mb">
-                            <div className="cart__bill__value">
-                              <div className="cart__bill__title text-end">{formatter(calcTotalPrice())}</div>
-                            </div>
-                          </div>
-                          <div className="col-6 cart__bill--mb">
-                            <div className="cart__bill__ml cart__bill__title">{CART_PAGE.SHIPPING_FEE}</div>
-                          </div>
-                          <div className="col-6 cart__bill--mb">
-                            <div className="cart__bill__value">
-                              <div className="cart__bill__title text-end">
-                                <span>{CART_PAGE.FREE}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-6 cart__bill--mb row-sum">
-                            <div className="cart__bill__ml cart__bill__title"> {CART_PAGE.TOTAL_AMOUNT} </div>
-                          </div>
-                          <div className="col-6 cart__bill--mb  row-sum">
-                            <div className="cart__bill__value">
-                              <div className="cart__bill__title text-end text-red">{formatter(calcTotalPrice())}</div>
-                            </div>
-                          </div>
-                        </div>
-                        <span onClick={handlePurchase}>
-                              <button data-address="[]" id="btn-checkout" type="button" className="btn btn-danger cart__bill__total">
-                                  <span className="text-checkout">{CART_PAGE.PAYMENT_TOTAL}  {formatter(calcTotalPrice())} <span>{CART_PAGE.COD}</span></span>
-                              </button>
-                            </span>
+                      <div className="cart__address__description pdr-76px">
+                        <div className="fw-bold">{CART_PAGE.COD}</div>
+                        <div className="font-12 ">{CART_PAGE.CASH_ON_DELIVERY}</div>
                       </div>
                     </div>
                   </div>
+                  <div className="cart__bill position-relative">
+                    <div className="row me-0 ms-0">
+                      <div className="col-6 cart__bill--mb">
+                        <div className="cart__bill__ml cart__bill__title">{CART_PAGE.SUBTOTAL}</div>
+                      </div>
+                      <div className="col-6 cart__bill--mb">
+                        <div className="cart__bill__value">
+                          <div className="cart__bill__title text-end">{formatter(calcTotalPrice())}</div>
+                        </div>
+                      </div>
+                      <div className="col-6 cart__bill--mb">
+                        <div className="cart__bill__ml cart__bill__title">{CART_PAGE.SHIPPING_FEE}</div>
+                      </div>
+                      <div className="col-6 cart__bill--mb">
+                        <div className="cart__bill__value">
+                          <div className="cart__bill__title text-end">
+                            <span>{CART_PAGE.FREE}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-6 cart__bill--mb row-sum">
+                        <div className="cart__bill__ml cart__bill__title"> {CART_PAGE.TOTAL_AMOUNT} </div>
+                      </div>
+                      <div className="col-6 cart__bill--mb  row-sum">
+                        <div className="cart__bill__value">
+                          <div className="cart__bill__title text-end text-red">{formatter(calcTotalPrice())}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <span onClick={handlePurchase}>
+                      <button data-address="[]" id="btn-checkout" type="button" className="btn btn-danger cart__bill__total">
+                        <span className="text-checkout">{CART_PAGE.PAYMENT_TOTAL}  {formatter(calcTotalPrice())} <span>{CART_PAGE.COD}</span></span>
+                      </button>
+                    </span>
+                  </div>
                 </div>
               </div>
-          }
-        </section>
-      </main>
+            </div>
+          </div>
+        }
+      </section>
+    </main>
   );
 }
 

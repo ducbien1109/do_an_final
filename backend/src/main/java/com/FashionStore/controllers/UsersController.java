@@ -15,6 +15,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +30,9 @@ import java.util.*;
 @RestController
 @RequestMapping("${api.base-path}")
 public class UsersController {
+    @Autowired
+    private JavaMailSender javaMailSender;
+
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
@@ -324,5 +329,45 @@ public class UsersController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+    }
+    @PostMapping("${endpoint.admin.forgot-password}")
+    public ResponseEntity<?> forgotPassword(HttpServletRequest request) {
+        String email = request.getParameter("email");
+        Users users = usersRepository.findUsersByEmail(email);
+        if (users == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        String newPassword = generateNewPassword();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        users.setForgotPassword(passwordEncoder.encode(newPassword));
+        usersRepository.save(users);
+
+        sendEmail(email, "New Password", "Your new password is: " + newPassword);
+
+        return ResponseEntity.ok("New password sent to your email");
+    }
+
+    private void sendEmail(String to, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        javaMailSender.send(message);
+    }
+
+    private String generateNewPassword() {
+        String newPassword = generateRandomPassword();
+        return newPassword;
+    }
+
+    private String generateRandomPassword() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder builder = new StringBuilder();
+        int length = 10;
+        for (int i = 0; i < length; i++) {
+            int index = (int)(Math.random() * chars.length());
+            builder.append(chars.charAt(index));
+        }
+        return builder.toString();
     }
 }

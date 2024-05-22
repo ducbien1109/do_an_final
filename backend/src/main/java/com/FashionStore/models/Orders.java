@@ -34,6 +34,9 @@ public class Orders {
     @Column(name = "AddressDetails")
     private String addressDetails;
 
+    @Column(name = "payment")
+    private String payment;
+
     @Transient
     private List<OrderDetails> orderDetails;
 
@@ -49,7 +52,7 @@ public class Orders {
 
     public Orders(Date orderDate, Long totalAmount,
                   String orderStatus, Long userID,
-                  String recipientName, String recipientPhone, 
+                  String recipientName, String recipientPhone,
                   String addressDetails) {
         this.orderDate = orderDate;
         this.totalAmount = totalAmount;
@@ -146,5 +149,13 @@ public class Orders {
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 }

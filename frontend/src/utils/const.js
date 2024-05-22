@@ -133,6 +133,7 @@ export const PROFILE_PAGE = {
     CANCEL_ORDER: "Huỷ đơn hàng",
     PAYMENT_METHOD: "Hình thức thanh toán:",
     CASH_ON_DELIVERY: "Thanh toán khi nhận hàng",
+    CASH_ON_DELIVERY_ONLINE: "Thanh toán online",
     SHIPPING_ADDRESS: "Địa chỉ nhận hàng:",
     NO_ORDERS: "Không có đơn hàng nào"
   },
@@ -158,7 +159,7 @@ export const PROFILE_PAGE = {
 
 export const FORGOT_PASSWORD_DIALOG = {
   FORGOT_PASSWORD: "Quên mật khẩu",
-  PLEASE_VISIT_STORE: "Quý khách vui lòng đến trực tiếp cửa hàng",
+  PLEASE_VISIT_STORE: "Của hàng đã gửi mật khẩu tại mail đăng nhập của bạn ",
   OR_CONTACT_HOTLINE: "hoặc liên hệ qua hotline ",
   FOR_SUPPORT: " để được hỗ trợ.",
   BACK_TO_PAGE: "Trở lại trang",
@@ -278,6 +279,15 @@ export const MANAGEMENT_PAGE = {
       ADD_ACCOUNT: "Thêm người dùng",
     },
   },
+
+  COMMENT_MANAGEMENT: {
+    KEY: "comment-management",
+    LABEL: "Quản lý Comment",
+    SUB: {
+      COMMENT_LIST: "Danh sách Comment",
+      ADD_COMMENT: "Thêm Comment",
+    },
+  },
 };
 
 export const ACCOUNT_LIST_PAGE = {
@@ -285,6 +295,13 @@ export const ACCOUNT_LIST_PAGE = {
   SEARCH_BY: "Tìm kiếm theo:",
   SEARCH_KEYWORD_PLACEHOLDER: "Nhập từ khóa",
   ADD_USER_BTN: "Thêm người dùng",
+}
+
+export const COMMENT_LIST_PAGE = {
+  COMMENT_LIST: "DANH SÁCH COMMENT",
+  SEARCH_BY: "Tìm kiếm theo:",
+  SEARCH_KEYWORD_PLACEHOLDER: "Nhập từ khóa",
+  ADD_COMMENT_BTN: "Thêm comment",
 }
 
 export const ADD_ACCOUNT_PAGE = {
@@ -299,6 +316,20 @@ export const ADD_ACCOUNT_PAGE = {
   PASSWORD_PLACEHOLDER: "Nhập mật khẩu",
   ADD_BTN: "Thêm",
   REFRESH_BTN: "Làm mới"
+}
+
+export const ADD_COMMENT_PAGE = {
+  // ADD_USER: "Thêm người dùng",
+  // FULL_NAME: "Họ và tên",
+  // FULL_NAME_PLACEHOLDER: "Nhập họ và tên",
+  // EMAIL: "Email",
+  // EMAIL_PLACEHOLDER: "Nhập email",
+  // PHONE_NUMBER: "Số điện thoại",
+  // PHONE_NUMBER_PLACEHOLDER: "Nhập số điện thoại",
+  // PASSWORD: "Mật khẩu",
+  // PASSWORD_PLACEHOLDER: "Nhập mật khẩu",
+  // ADD_BTN: "Thêm",
+  // REFRESH_BTN: "Làm mới"
 }
 
 export const ADD_PRODUCT_PAGE = {
@@ -684,6 +715,7 @@ export const API = {
     REGISTER_ENDPOINT: "/api/public/register",
     GET_ALL_CATEGORIES_ENDPOINT: "/api/public/get-all-categories",
     UPLOAD_PROFILE_IMAGE_ENDPOINT: "/api/public/upload-profile-image",
+    FORGOT_PASSWORD: "/api/public/forgot-password",
     GET_STORE_INFORMATION_ENDPOINT: "/api/public/get-store-information",
     GET_ALL_BANNERS_ENDPOINT: "/api/public/get-all-banners",
     DELETE_PRODUCT_IN_CART_ENDPOINT: "/api/public/delete-product-in-cart",

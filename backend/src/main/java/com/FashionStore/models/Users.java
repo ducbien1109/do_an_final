@@ -36,6 +36,9 @@ public class Users {
     @Column(name = "IsAdmin")
     private boolean isAdmin;
 
+    @Column(name = "ForgotPassword")
+    private String forgotPassword;
+
     public Users() {
 
     }
@@ -128,6 +131,14 @@ public class Users {
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    public String getForgotPassword() {
+        return forgotPassword;
+    }
+
+    public void setForgotPassword(String forgotPassword) {
+        this.forgotPassword = forgotPassword;
     }
 
     @Override

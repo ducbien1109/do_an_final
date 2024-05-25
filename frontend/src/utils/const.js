@@ -200,6 +200,7 @@ export const ORDER_LIST_PAGE = {
   TOTAL_AMOUNT: "Thành tiền:",
   PAYMENT_METHOD_LABEL: "Hình thức thanh toán:",
   PAYMENT_METHOD: "Thanh toán khi nhận hàng",
+  PAYMENT_METHOD_ONLINE: "Thanh toán online",
   SHIPPING_ADDRESS_LABEL: "Địa chỉ nhận hàng:",
   NO_ORDERS: "Không có đơn hàng nào",
   SEARCH_BY: "Tìm kiếm theo:",

@@ -72,7 +72,6 @@ const TabContent = ({ openTab, setOpenTab }) => {
     getData();
   }, [openTab]);
 
-
   function handleCancelOrder(orderID) {
     const formData = new FormData();
     formData.append('orderID', orderID);

@@ -45,6 +45,7 @@ function CartPage() {
   const [userID, setUserID] = useState(null);
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+  const [paymentMethod, setPaymentMethod] = useState("2");
 
 
   const handleIncreaseAmount = (id) => {
@@ -93,7 +94,48 @@ function CartPage() {
       toast.warn(MESSAGE.INSUFFICIENT_QUANTITY);
     }
   };
+  const handlePaymentMethodChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+  const createOnlinePayment = async () => {
+    const formData = new FormData();
 
+    product.forEach((product, index) => {
+      formData.append('productID', product.productID);
+      formData.append('addressID', selectedAddress.addressID);
+      formData.append('totalAmount', calcTotalPrice());
+      formData.append('sizeID', product.sizeID);
+      formData.append('quantityPurchase', product.quantityPurchase);
+    });
+    try {
+      const response = await fetch(`http://localhost:9999/api/create_payment_order`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.status === 'Ok') {
+          window.location.href = data.url;
+        } else {
+          toast.error("Không thể tạo thanh toán trực tuyến. Vui lòng thử lại.");
+        }
+      } else {
+        toast.warn(MESSAGE.PRODUCT_WAS_DELETED);
+        navigate('/');
+        const data = await response.json();
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(MESSAGE.DB_CONNECTION_ERROR);
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleDecreaseAmount = (id, amount = 1) => {
     const updatedProduct = [...product];
     updatedProduct[id].quantityPurchase -= amount;
@@ -396,8 +438,32 @@ function CartPage() {
                       </div>
                       <div className="cart__address__description pdr-76px">
                         <div className="fw-bold">{CART_PAGE.COD}</div>
-                        <div className="font-12 ">{CART_PAGE.CASH_ON_DELIVERY}</div>
+                        <div className="font-12 ">{CART_PAGE.CASH_ON_DELIVERY}</div>NNN
                       </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <input
+                        type="radio"
+                        id="online-payment"
+                        name="payment-method"
+                        value="1"
+                        checked={paymentMethod === "1"}
+                        onChange={handlePaymentMethodChange}
+                      />
+                      <label htmlFor="online-payment">Thanh toán online</label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        id="cash-on-delivery"
+                        name="payment-method"
+                        value="2"
+                        checked={paymentMethod === "2"}
+                        onChange={handlePaymentMethodChange}
+                      />
+                      <label htmlFor="cash-on-delivery">Thanh toán khi nhận hàng</label>
                     </div>
                   </div>
                   <div className="cart__bill position-relative">
@@ -434,6 +500,23 @@ function CartPage() {
                         <span className="text-checkout">{CART_PAGE.PAYMENT_TOTAL}  {formatter(calcTotalPrice())} <span>{CART_PAGE.COD}</span></span>
                       </button>
                     </span>
+                    {paymentMethod === "2" ? (
+                      <span onClick={handlePurchase}>
+                        <button data-address="[]" id="btn-checkout" type="button" className="btn btn-danger cart__bill__total">
+                          <span className="text-checkout">
+                            {CART_PAGE.PAYMENT_TOTAL} {formatter(calcTotalPrice())} <span>{CART_PAGE.COD}</span>
+                          </span>
+                        </button>
+                      </span>
+                    ) : paymentMethod === "1" ? (
+                      <span onClick={createOnlinePayment}>
+                        <button data-address="[]" id="btn-checkout" type="button" className="btn btn-danger cart__bill__total">
+                          <span className="text-checkout">
+                            {CART_PAGE.PAYMENT_TOTAL} {formatter(calcTotalPrice())} <span>{CART_PAGE.COD}</span>
+                          </span>
+                        </button>
+                      </span>
+                    ) : null}
                   </div>
                 </div>
               </div>

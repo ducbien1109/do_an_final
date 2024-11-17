@@ -95,10 +95,10 @@ const CheckoutPage = () => {
     if (paymentMethod === "1") {
       await createOnlinePayment();
     } else if (paymentMethod === "2") {
-      makeOrder();
       await fetchData();
     }
-
+    // makeOrder();
+    // await fetchData();
     let shouldMakeOrder = true;
 
     if (checkQuantity() === true) {
@@ -418,15 +418,7 @@ const CheckoutPage = () => {
                         <span className="text-checkout">{CHECKOUT_PAGE.PAYMENT_TOTAL}  {formatter(product.productPrice * amount)} <span>{CHECKOUT_PAGE.COD}</span></span>
                       </button>
                     </span> */}
-                    {paymentMethod === "2" ? (
-                      <span onClick={handlePurchase}>
-                        <button data-address="[]" id="btn-checkout" type="button" className="btn btn-danger cart__bill__total">
-                          <span className="text-checkout">
-                            {CHECKOUT_PAGE.PAYMENT_TOTAL} {formatter(product.productPrice * amount)} <span>{CHECKOUT_PAGE.COD}</span>
-                          </span>
-                        </button>
-                      </span>
-                    ) : paymentMethod === "1" ? (
+                    {paymentMethod === "1" ? (
                       <span onClick={createOnlinePayment}>
                         <button data-address="[]" id="btn-checkout" type="button" className="btn btn-danger cart__bill__total">
                           <span className="text-checkout">
@@ -434,7 +426,13 @@ const CheckoutPage = () => {
                           </span>
                         </button>
                       </span>
-                    ) : null}
+                    ) : (
+                      <span onClick={handlePurchase}>
+                        <button data-address="[]" id="btn-checkout" type="button" className="btn btn-danger cart__bill__total">
+                          <span className="text-checkout">{CHECKOUT_PAGE.PAYMENT_TOTAL}  {formatter(product.productPrice * amount)} <span>{CHECKOUT_PAGE.COD}</span></span>
+                        </button>
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>

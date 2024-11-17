@@ -9,21 +9,23 @@ export const CART_PAGE = {
   FREE: "Miễn phí",
   TOTAL_AMOUNT: "TỔNG",
   PAYMENT_TOTAL: "Đặt hàng:",
-}
+};
 
 export const CATEGORY_PAGE = {
   SEE_MORE: "Xem thêm",
   NO_RESULTS_FOUND: "Không có kết quả nào cho từ khóa trên",
-  PLEASE_TRY_AGAIN_WITH_DIFFERENT_KEYWORD: "Xin vui lòng thử lại với từ khóa khác.",
+  PLEASE_TRY_AGAIN_WITH_DIFFERENT_KEYWORD:
+    "Xin vui lòng thử lại với từ khóa khác.",
   EXAMPLE_KEYWORDS: " VD: Áo khoác, Quần dài...",
-}
+};
 
 export const SEARCH_PRODUCT_PAGE = {
   SEE_MORE: "Xem thêm",
   NO_RESULTS_FOUND: "Không có kết quả nào cho từ khóa trên",
-  PLEASE_TRY_AGAIN_WITH_DIFFERENT_KEYWORD: "Xin vui lòng thử lại với từ khóa khác.",
+  PLEASE_TRY_AGAIN_WITH_DIFFERENT_KEYWORD:
+    "Xin vui lòng thử lại với từ khóa khác.",
   EXAMPLE_KEYWORDS: " VD: Áo khoác, Quần dài...",
-}
+};
 
 export const CHECKOUT_PAGE = {
   EMPTY_CART_MESSAGE: "Bạn chưa có sản phẩm nào trong giỏ hàng",
@@ -36,7 +38,7 @@ export const CHECKOUT_PAGE = {
   FREE: "Miễn phí",
   TOTAL_AMOUNT: "TỔNG",
   PAYMENT_TOTAL: "Đặt hàng:",
-}
+};
 
 export const ADDRESS_SECTION = {
   SHIPPING_ADDRESS_TITLE: "Địa chỉ nhận hàng",
@@ -58,12 +60,12 @@ export const ADDRESS_SECTION = {
   ADDRESS_PLACEHOLDER: "Nhập địa chỉ",
   CREATE_SHIPPING_ADDRESS_HERE: "Tạo địa chỉ nhận hàng tại đây",
   CHANGE_ADDRESS: "Thay đổi địa chỉ",
-}
+};
 
 export const HOME_PAGE = {
   PRODUCT_CATEGORIES_TITLE: "DANH MỤC SẢN PHẨM",
   SEE_MORE: "Xem thêm",
-}
+};
 
 export const PRODUCT_DETAIL_PAGE = {
   SIZE: "Kích thước",
@@ -74,7 +76,7 @@ export const PRODUCT_DETAIL_PAGE = {
   PRODUCT_DESCRIPTION: "Mô tả sản phẩm",
   CATEGORY_1: "Danh mục 1",
   CATEGORY_2: "Danh mục 2",
-}
+};
 
 export const PROFILE_PAGE = {
   HELLO_TITLE: "Xin chào,",
@@ -83,14 +85,14 @@ export const PROFILE_PAGE = {
     EDIT_PROFILE: "Chỉnh sửa thông tin cá nhân",
     ADDRESS_BOOK: "Sổ địa chỉ",
     CHANGE_PASSWORD: "Đổi mật khẩu",
-    LOGOUT: "Đăng xuất"
+    LOGOUT: "Đăng xuất",
   },
   PROFILE_ADDRESS: {
     DEFAULT: "Mặc định",
     SET_DEFAULT: "Thiết lập mặc định",
     DELETE: "Xóa",
     ADDRESS_BOOK: "Sổ địa chỉ",
-    ADD_NEW_ADDRESS: "Thêm địa chỉ mới"
+    ADD_NEW_ADDRESS: "Thêm địa chỉ mới",
   },
   PROFILE_CHANGE_PASSWORD: {
     CHANGE_PASSWORD: "Đổi mật khẩu",
@@ -101,7 +103,7 @@ export const PROFILE_PAGE = {
     CONFIRM_NEW_PASSWORD: "Nhập lại mật khẩu mới",
     CONFIRM_NEW_PASSWORD_PLACEHOLDER: "Nhập lại mật khẩu mới",
     SAVE_CHANGES: "Lưu lại",
-    REFRESH: "Làm mới"
+    REFRESH: "Làm mới",
   },
   PROFILE_EDIT_ADDRESS: {
     UPDATE_ADDRESS: "Cập nhật địa chỉ",
@@ -112,7 +114,7 @@ export const PROFILE_PAGE = {
     ADDRESS: "Địa chỉ",
     ADDRESS_PLACEHOLDER: "Nhập địa chỉ",
     SAVE_CHANGES: "Lưu lại",
-    CANCEL: "Hủy bỏ"
+    CANCEL: "Hủy bỏ",
   },
   PROFILE_NEW_ADDRESS: {
     ADD_NEW_ADDRESS: "Thêm địa chỉ mới",
@@ -123,7 +125,7 @@ export const PROFILE_PAGE = {
     ADDRESS: "Địa chỉ",
     ADDRESS_PLACEHOLDER: "Nhập địa chỉ",
     SAVE_CHANGES: "Lưu lại",
-    CANCEL: "Hủy bỏ"
+    CANCEL: "Hủy bỏ",
   },
   PROFILE_ORDERS_PAGE: {
     ORDER_ID: "Mã đơn hàng",
@@ -135,7 +137,7 @@ export const PROFILE_PAGE = {
     CASH_ON_DELIVERY: "Thanh toán khi nhận hàng",
     CASH_ON_DELIVERY_ONLINE: "Thanh toán online",
     SHIPPING_ADDRESS: "Địa chỉ nhận hàng:",
-    NO_ORDERS: "Không có đơn hàng nào"
+    NO_ORDERS: "Không có đơn hàng nào",
   },
   PROFILE_PERSONAL_INFORMATION_PAGE: {
     EDIT_PERSONAL_INFORMATION: "Chỉnh sửa thông tin cá nhân",
@@ -153,9 +155,9 @@ export const PROFILE_PAGE = {
     DAY: "Ngày",
     MONTH: "Tháng",
     YEAR: "Năm",
-    SAVE_INFORMATION: "Lưu thông tin"
+    SAVE_INFORMATION: "Lưu thông tin",
   },
-}
+};
 
 export const FORGOT_PASSWORD_DIALOG = {
   FORGOT_PASSWORD: "Quên mật khẩu",
@@ -163,8 +165,8 @@ export const FORGOT_PASSWORD_DIALOG = {
   OR_CONTACT_HOTLINE: "hoặc liên hệ qua hotline ",
   FOR_SUPPORT: " để được hỗ trợ.",
   BACK_TO_PAGE: "Trở lại trang",
-  LOGIN: "Đăng nhập"
-}
+  LOGIN: "Đăng nhập",
+};
 
 export const LOGIN = {
   LOGIN: "Đăng nhập",
@@ -175,8 +177,8 @@ export const LOGIN = {
   FORGOT_PASSWORD_QUESTION: "Quên mật khẩu?",
   LOGIN_BUTTON: "Đăng nhập",
   NO_ACCOUNT_QUESTION: "Chưa có tài khoản?",
-  REGISTER_HERE: "Đăng ký tại đây"
-}
+  REGISTER_HERE: "Đăng ký tại đây",
+};
 
 export const REGISTER = {
   REGISTER: "Đăng ký",
@@ -190,8 +192,8 @@ export const REGISTER = {
   PASSWORD_PLACEHOLDER: "Nhập mật khẩu",
   REGISTER_BUTTON: "Đăng ký",
   ALREADY_HAVE_ACCOUNT_QUESTION: "Đã có tài khoản?",
-  LOGIN_HERE: "Đăng nhập tại đây"
-}
+  LOGIN_HERE: "Đăng nhập tại đây",
+};
 
 export const ORDER_LIST_PAGE = {
   ORDER_ID: "Mã đơn hàng",
@@ -210,15 +212,15 @@ export const ORDER_LIST_PAGE = {
   EDIT_ORDER_STATUS: "Chỉnh sửa trạng thái đơn hàng",
   SAVE_BTN: "Lưu",
   CANCEL_BTN: "Hủy",
-}
+};
 
 export const SALES_PRODUCT_QUANTITY_STATISTICS_PAGE = {
   PRODUCT_LIST: "DANH SÁCH SẢN PHẨM",
   SEARCH_BY_PRODUCT_NAME: "Tìm kiếm theo tên sản phẩm:",
   ENTER_KEYWORDS_PLACEHOLDER: "Nhập từ khóa",
   SOLD: "Đã bán",
-  PRICE: "Tiền"
-}
+  PRICE: "Tiền",
+};
 
 export const EDIT_BANNER_PAGE = {
   BANNER_TITLE: "Banner quay vòng",
@@ -230,22 +232,22 @@ export const EDIT_BANNER_PAGE = {
   IMAGE_FORMAT: "Định dạng hình ảnh: JPG, JPEG, PNG",
   UPLOAD_IMAGE_LABEL: "Tải lên hình ảnh",
   SAVE_BTN: "Lưu lại",
-  RESTORE_BTN: "Khôi phục"
-}
+  RESTORE_BTN: "Khôi phục",
+};
 
 export const DO_NOT_HAVE_PERMISSION_PAGE = {
   NO_PERMISSION_ACCESS: "Bạn không có quyền truy cập trang web này",
-  PLEASE_LOGIN_ADMIN: "Vui lòng đăng nhập bằng tài khoản admin!"
-}
+  PLEASE_LOGIN_ADMIN: "Vui lòng đăng nhập bằng tài khoản admin!",
+};
 
 export const NOT_FOUND_PAGE = {
   ERROR_OCCURRED: "Ôi, có lỗi xảy ra rồi....",
-  PLEASE_TRY_AGAIN: "Bạn vui lòng thử lại nhé!"
-}
+  PLEASE_TRY_AGAIN: "Bạn vui lòng thử lại nhé!",
+};
 
-export const NUMBER_PRODUCT_LIMIT = 8
+export const NUMBER_PRODUCT_LIMIT = 8;
 
-export const ROOT_PARENT_CATEGORY_ID = 0
+export const ROOT_PARENT_CATEGORY_ID = 0;
 
 export const MANAGEMENT_PAGE = {
   PRODUCT_MANAGEMENT: {
@@ -296,14 +298,14 @@ export const ACCOUNT_LIST_PAGE = {
   SEARCH_BY: "Tìm kiếm theo:",
   SEARCH_KEYWORD_PLACEHOLDER: "Nhập từ khóa",
   ADD_USER_BTN: "Thêm người dùng",
-}
+};
 
 export const COMMENT_LIST_PAGE = {
   COMMENT_LIST: "DANH SÁCH COMMENT",
   SEARCH_BY: "Tìm kiếm theo:",
   SEARCH_KEYWORD_PLACEHOLDER: "Nhập từ khóa",
   ADD_COMMENT_BTN: "Thêm comment",
-}
+};
 
 export const ADD_ACCOUNT_PAGE = {
   ADD_USER: "Thêm người dùng",
@@ -316,8 +318,8 @@ export const ADD_ACCOUNT_PAGE = {
   PASSWORD: "Mật khẩu",
   PASSWORD_PLACEHOLDER: "Nhập mật khẩu",
   ADD_BTN: "Thêm",
-  REFRESH_BTN: "Làm mới"
-}
+  REFRESH_BTN: "Làm mới",
+};
 
 export const ADD_COMMENT_PAGE = {
   // ADD_USER: "Thêm người dùng",
@@ -331,17 +333,17 @@ export const ADD_COMMENT_PAGE = {
   // PASSWORD_PLACEHOLDER: "Nhập mật khẩu",
   // ADD_BTN: "Thêm",
   // REFRESH_BTN: "Làm mới"
-}
+};
 
 export const ADD_PRODUCT_PAGE = {
   SAVE_BTN: "Lưu lại",
-  REFRESH_BTN: "Làm mới"
-}
+  REFRESH_BTN: "Làm mới",
+};
 
 export const EDIT_PRODUCT_PAGE = {
   SAVE_BTN: "Lưu",
-  RESTORE_BTN: "Khôi phục"
-}
+  RESTORE_BTN: "Khôi phục",
+};
 
 export const LIST_OF_PRODUCTS_AND_CATEGORIES_PAGE = {
   NO_PRODUCTS: "Không có sản phẩm",
@@ -349,8 +351,8 @@ export const LIST_OF_PRODUCTS_AND_CATEGORIES_PAGE = {
   ADD_PARENT_CATEGORY: "Thêm danh mục lớn",
   SEARCH_BY: "Tìm kiếm theo:",
   SEARCH_KEYWORD_PLACEHOLDER: "Nhập từ khóa",
-  DISPLAY_QUANTITY: "Số lượng hiển thị:"
-}
+  DISPLAY_QUANTITY: "Số lượng hiển thị:",
+};
 
 export const CATEGORY_DIALOG = {
   EDIT_CATEGORY: "Chỉnh sửa danh mục",
@@ -358,22 +360,22 @@ export const CATEGORY_DIALOG = {
   SELECTED: "Đã chọn:",
   NOT_SELECTED_CATEGORY: "Chưa chọn danh mục",
   CANCEL_BTN: "Hủy",
-  ACCEPT_BTN: "Xác nhận"
-}
+  ACCEPT_BTN: "Xác nhận",
+};
 
 export const ADD_CATEGORY_DIALOG = {
   ADD_CATEGORY: "Thêm danh mục",
   ADD_BTN: "Thêm",
   CANCEL_BTN: "Hủy",
-  CATEGORY_NAME_PLACEHOLDER: "Nhập tên danh mục"
-}
+  CATEGORY_NAME_PLACEHOLDER: "Nhập tên danh mục",
+};
 
 export const EDIT_CATEGORY_DIALOG = {
   EDIT_CATEGORY: "Chỉnh sửa danh mục",
   SAVE_BTN: "Lưu",
   CANCEL_BTN: "Hủy",
-  CATEGORY_NAME_PLACEHOLDER: "Nhập tên danh mục"
-}
+  CATEGORY_NAME_PLACEHOLDER: "Nhập tên danh mục",
+};
 
 export const PRODUCT_DETAILS = {
   MAX_PRODUCT_IMAGES: 8,
@@ -392,42 +394,44 @@ export const PRODUCT_DETAILS = {
   CATEGORY: "Danh mục",
   SELECT_CATEGORY: "Chọn danh mục sản phẩm",
   PRODUCT_DESCRIPTION: "Mô tả sản phẩm",
-}
+};
 
 export const SIZE_FIELD = {
   SIZE_NAME: "Tên kích cỡ",
   SIZE_NAME_PLACEHOLDER: "ví dụ: S, M, L, XL, v.v..",
   QUANTITY: "Số lượng",
-  QUANTITY_PLACEHOLDER: "Nhập số lượng"
-}
+  QUANTITY_PLACEHOLDER: "Nhập số lượng",
+};
 
 export const BANNER = {
   MAX_BANNER_IMAGES: 8,
-}
+};
 
 export const IMAGE_URL = {
-  LOGO_FASHION_STORE: "https://maltavirtualmall.com/wp-content/uploads/2021/11/KFashion-Baby-Fashion-Footwear-MVM-Malta-New.webp",
+  LOGO_FASHION_STORE:
+    "https://cdn.haitrieu.com/wp-content/uploads/2022/03/Logo-DH-Kien-Truc-Da-Nang-DAU-1024x1024.png",
   FORGOT_PASSWORD_IMG: "https://iili.io/J5YsSYx.jpg",
   EMPTY_RESULT_IMG: "https://iili.io/J5aOmCl.png",
   SECURITY_IMG: "https://iili.io/J5aSziv.png",
   EMPTY_PRODUCT_IMG: "https://iili.io/J51bEOX.png",
-  DEFAULT_AVATAR_IMG: "https://t4.ftcdn.net/jpg/05/49/98/39/240_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg",
-}
+  DEFAULT_AVATAR_IMG:
+    "https://t4.ftcdn.net/jpg/05/49/98/39/240_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg",
+};
 
 export const DIALOGS = {
   LOGIN: "login",
   REGISTER: "register",
-  FORGOT_PASSWORD: "forgot-password"
-}
+  FORGOT_PASSWORD: "forgot-password",
+};
 
 export const CATEGORY = {
   SUB_CATEGORY: "SUB_CATEGORY",
   PARENT_CATEGORY: "PARENT_CATEGORY",
-}
+};
 
 export const DATE_PICKER = {
   MAX_DAY_DISTANCE: 20,
-}
+};
 
 export const HEADER = {
   MENU_ITEM_LIMIT: 5,
@@ -445,7 +449,7 @@ export const HEADER = {
     CHANGE_PASSWORD: "Đổi mật khẩu",
     LOGOUT: "Đăng xuất",
   },
-}
+};
 
 export const FOOTER = {
   TITLE_1: "Cửa hàng thời trang uy tín số 1",
@@ -454,9 +458,20 @@ export const FOOTER = {
   OPENING_HOURS_TXT: "Giờ mở cửa:",
   EMAIL_TXT: "Email:",
   HOTLINE_TXT: "Hotline:",
-  DESCRIPTION_CONTENT: <>Chào mừng bạn đến với <span style={{ color: '#a68242', fontWeight: "600" }}>K_Fashion</span> - nơi thể hiện bản thân qua những bộ trang phục đẳng cấp và sáng tạo. Chúng tôi cam kết mang lại trải nghiệm mua sắm độc đáo, nơi bạn có thể tìm thấy những sản phẩm thời trang hàng đầu và uy tín. Đội ngũ chuyên nghiệp luôn sẵn sàng hỗ trợ bạn. Hãy đồng hành cùng chúng tôi để khám phá phong cách của riêng bạn!</>,
-  DEVELOPED_BY: "Developed by Group 14 - Web Application Development Course - INT3306 3",
-}
+  DESCRIPTION_CONTENT: (
+    <>
+      Chào mừng bạn đến với{" "}
+      <span style={{ color: "#a68242", fontWeight: "600" }}>B_Shop</span> - nơi
+      thể hiện bản thân qua những bộ trang phục đẳng cấp và sáng tạo. Chúng tôi
+      cam kết mang lại trải nghiệm mua sắm độc đáo, nơi bạn có thể tìm thấy
+      những sản phẩm thời trang hàng đầu và uy tín. Đội ngũ chuyên nghiệp luôn
+      sẵn sàng hỗ trợ bạn. Hãy đồng hành cùng chúng tôi để khám phá phong cách
+      của riêng bạn!
+    </>
+  ),
+  DEVELOPED_BY:
+    "Developed by Group 14 - Web Application Development Course - INT3306 3",
+};
 
 export const SELECT = {
   DISPLAY_QUANTITY: {
@@ -466,7 +481,7 @@ export const SELECT = {
       FIFTY: 50,
       HUNDRED: 100,
       ONE_HUNDRED_FIFTY: 150,
-      TWO_HUNDRED: 200
+      TWO_HUNDRED: 200,
     },
     LABEL: {
       FIVE: 5,
@@ -474,8 +489,8 @@ export const SELECT = {
       FIFTY: 50,
       HUNDRED: 100,
       ONE_HUNDRED_FIFTY: 150,
-      TWO_HUNDRED: 200
-    }
+      TWO_HUNDRED: 200,
+    },
   },
   PERMISSION: {
     VALUE: {
@@ -485,9 +500,9 @@ export const SELECT = {
     LABEL: {
       USER: <div style={{ fontWeight: "600" }}>Người dùng</div>,
       ADMIN: <div style={{ fontWeight: "600" }}>Quản trị viên</div>,
-    }
+    },
   },
-}
+};
 
 export const SEARCH = {
   PRODUCT_CATEGORY: {
@@ -500,7 +515,7 @@ export const SEARCH = {
       CATEGORY: "Danh mục lớn",
       SUB_CATEGORY: "Danh mục con",
       PRODUCT: "Sản phẩm",
-    }
+    },
   },
   USER: {
     VALUE: {
@@ -512,7 +527,7 @@ export const SEARCH = {
       FULL_NAME: "Họ tên",
       PHONE_NUMBER: "Số điện thoại",
       EMAIL: "Địa chỉ email",
-    }
+    },
   },
   ORDER: {
     VALUE: {
@@ -524,9 +539,9 @@ export const SEARCH = {
       ORDER_DATE: "Ngày đặt hàng",
       PHONE_NUMBER: "Số điện thoại đặt hàng",
       ORDER_ID: "Mã đơn hàng",
-    }
+    },
   },
-}
+};
 
 export const TOOLTIP = {
   DELETE_USER: "Xóa người dùng",
@@ -538,8 +553,8 @@ export const TOOLTIP = {
   ADD_SUBCATEGORY: "Thêm danh mục con",
   DELETE_CATEGORY: "Xóa danh mục",
   EDIT_CATEGORY: "Chỉnh sửa danh mục",
-  EDIT_ACCESS_PERMISSION: "Chỉnh sửa quyền truy cập"
-}
+  EDIT_ACCESS_PERMISSION: "Chỉnh sửa quyền truy cập",
+};
 
 export const POPCONFIRM = {
   DELETE: "Xóa",
@@ -549,9 +564,18 @@ export const POPCONFIRM = {
   CONFIRM_DELETE_ADDRESS: "Chắc chắn xóa địa chỉ này?",
   CONFIRM_CANCEL_ORDER: "Chắc chắn hủy đơn?",
   CONFIRM_DELETE_CATEGORY: "Bạn có chắc chắn xóa danh mục này không?",
-  DELETE_PARENT_CATEGORY_WARNING: <div>Thao tác này sẽ xóa tất cả danh mục con <br></br> cùng với sản phẩm thuộc danh mục này.</div>,
-  DELETE_SUB_CATEGORY_WARNING: <div>Thao tác này sẽ xóa tất cả sản phẩm  <br></br> thuộc danh mục này.</div>,
-}
+  DELETE_PARENT_CATEGORY_WARNING: (
+    <div>
+      Thao tác này sẽ xóa tất cả danh mục con <br></br> cùng với sản phẩm thuộc
+      danh mục này.
+    </div>
+  ),
+  DELETE_SUB_CATEGORY_WARNING: (
+    <div>
+      Thao tác này sẽ xóa tất cả sản phẩm <br></br> thuộc danh mục này.
+    </div>
+  ),
+};
 
 export const CONFIRM_DIALOG = {
   DELETE_TITLE_BTN_ACCEPT: "Xóa",
@@ -559,17 +583,21 @@ export const CONFIRM_DIALOG = {
   TITLE_BTN_ACCEPT: "Có",
   TITLE_BTN_CANCEL: "Không",
   WARNING_TITLE: "Cảnh báo",
-  CONFIRM_REFRESH_DATA: "Bạn có chắc chắn muốn làm mới dữ liệu? Thao tác này sẽ làm mới tất cả dữ liệu đã nhập.",
-  CONFIRM_RESTORE_DATA: "Bạn có chắc chắn muốn khôi phục dữ liệu? Thao tác này sẽ đưa dữ liệu về trạng thái cuối cùng được lưu lại.",
+  CONFIRM_REFRESH_DATA:
+    "Bạn có chắc chắn muốn làm mới dữ liệu? Thao tác này sẽ làm mới tất cả dữ liệu đã nhập.",
+  CONFIRM_RESTORE_DATA:
+    "Bạn có chắc chắn muốn khôi phục dữ liệu? Thao tác này sẽ đưa dữ liệu về trạng thái cuối cùng được lưu lại.",
   CONFIRM_DELETE_USER_SUBTITLE_1: "Bạn có chắc chắn xóa người dùng",
   CONFIRM_DELETE_USER_SUBTITLE_2: "không?",
-  DELETE_PARENT_CATEGORY_WARNING: "Thao tác này sẽ xóa tất cả danh mục con cùng với sản phẩm thuộc danh mục này.",
-  DELETE_SUB_CATEGORY_WARNING: "Thao tác này sẽ xóa tất cả những sản phẩm thuộc danh mục này.",
+  DELETE_PARENT_CATEGORY_WARNING:
+    "Thao tác này sẽ xóa tất cả danh mục con cùng với sản phẩm thuộc danh mục này.",
+  DELETE_SUB_CATEGORY_WARNING:
+    "Thao tác này sẽ xóa tất cả những sản phẩm thuộc danh mục này.",
   CONFIRM_DELETE_CATEGORY_SUBTITLE_1: "Bạn có chắc chắn xóa danh mục",
   CONFIRM_DELETE_CATEGORY_SUBTITLE_2: "không?",
   CONFIRM_DELETE_PRODUCT_SUBTITLE_1: "Bạn có chắc chắn xóa sản phẩm",
   CONFIRM_DELETE_PRODUCT_SUBTITLE_2: "không?",
-}
+};
 
 export const STORE_INFORMATION_PAGE = {
   STORE_INFORMATION_TITLE: "Thông tin cửa hàng",
@@ -585,8 +613,8 @@ export const STORE_INFORMATION_PAGE = {
   START_TIME_PLACEHOLDER: "Bắt đầu",
   END_TIME_PLACEHOLDER: "Kết thúc",
   UPDATE_BTN: "Cập nhật",
-  RESTORE_BTN: "Khôi phục"
-}
+  RESTORE_BTN: "Khôi phục",
+};
 
 export const BREADCRUMB = {
   HOME_PAGE: "Trang chủ",
@@ -605,29 +633,30 @@ export const BREADCRUMB = {
 
   SALES_MANAGEMENT: MANAGEMENT_PAGE.SALES_MANAGEMENT.LABEL,
   ORDER_LIST: MANAGEMENT_PAGE.SALES_MANAGEMENT.SUB.ORDER_LIST,
-  SALES_PRODUCT_QUANTITY_STATISTICS: MANAGEMENT_PAGE.SALES_MANAGEMENT.SUB.SALES_PRODUCT_QUANTITY_STATISTICS,
+  SALES_PRODUCT_QUANTITY_STATISTICS:
+    MANAGEMENT_PAGE.SALES_MANAGEMENT.SUB.SALES_PRODUCT_QUANTITY_STATISTICS,
 
   ACCOUNT_MANAGEMENT: MANAGEMENT_PAGE.ACCOUNT_MANAGEMENT.LABEL,
   ACCOUNT_LIST: MANAGEMENT_PAGE.ACCOUNT_MANAGEMENT.SUB.ACCOUNT_LIST,
   ADD_ACCOUNT: MANAGEMENT_PAGE.ACCOUNT_MANAGEMENT.SUB.ADD_ACCOUNT,
-}
+};
 
 export const SCROLLING = {
   NORMAL: "normal",
   SMOOTH: "smooth",
   NO_SCROLLING: "no-scrolling",
-}
+};
 
 export const SORT = {
   ASC: "1",
   DECS: "2",
-}
+};
 
 export const ADDRESS_MODAL = {
-  LIST_ADDRESS: 'LIST_ADDRESS',
-  CREATE_ADDRESS: 'CREATE_ADDRESS',
-  UPDATE_ADDRESS: 'UPDATE_ADDRESS'
-}
+  LIST_ADDRESS: "LIST_ADDRESS",
+  CREATE_ADDRESS: "CREATE_ADDRESS",
+  UPDATE_ADDRESS: "UPDATE_ADDRESS",
+};
 
 export const TAB_LIST_TEXT = {
   ALL: "Tất cả",
@@ -635,8 +664,9 @@ export const TAB_LIST_TEXT = {
   CONFIRMED: "Đã xác nhận",
   IN_TRANSIT: "Đang giao hàng",
   COMPLETED: "Hoàn thành",
-  CANCELLED: "Đã hủy"
-}
+  CANCELLED: "Đã hủy",
+  Total: "Tổng doanh thu",
+};
 
 export const TAB_LIST_ITEMS = [
   { id: "tab-all", text: TAB_LIST_TEXT.ALL },
@@ -644,8 +674,9 @@ export const TAB_LIST_ITEMS = [
   { id: "tab5", text: TAB_LIST_TEXT.CONFIRMED },
   { id: "tab2", text: TAB_LIST_TEXT.IN_TRANSIT },
   { id: "tab3", text: TAB_LIST_TEXT.COMPLETED },
-  { id: "tab4", text: TAB_LIST_TEXT.CANCELLED }
-]
+  { id: "tab4", text: TAB_LIST_TEXT.CANCELLED },
+  { id: "tab5", text: TAB_LIST_TEXT.Total },
+];
 
 export const FILTERS = {
   TITLE: "Bộ lọc",
@@ -653,7 +684,7 @@ export const FILTERS = {
   SELECT_FILTER_CONDITION: "Chọn điều kiện lọc",
   PRICE_LOW_TO_HIGH: "Sản phẩm giá thấp",
   PRICE_HIGH_TO_LOW: "Sản phẩm giá cao",
-}
+};
 
 export const ERROR = {
   CART_UPDATE_ERROR: "Lỗi khi cập nhật giỏ hàng.",
@@ -661,8 +692,8 @@ export const ERROR = {
   ORDER_PLACEMENT_ERROR: "Lỗi khi đặt hàng.",
   NO_TOKEN_ERROR: "Không có token.",
   SENDING_TOKEN_ERROR: "Lỗi khi gửi token.",
-  SERVER_CONNECTION_ERROR: "Lỗi kết nối tới máy chủ, vui lòng thử lại sau!"
-}
+  SERVER_CONNECTION_ERROR: "Lỗi kết nối tới máy chủ, vui lòng thử lại sau!",
+};
 
 export const MESSAGE = {
   DB_CONNECTION_ERROR: "Không thể kết nối với cơ sở dữ liệu",
@@ -692,7 +723,8 @@ export const MESSAGE = {
   CATEGORY_NAME_INVALID: "Tên danh mục phải bắt đầu bằng một chữ cái",
   EDIT_PRODUCT_SUCCESS: "Chỉnh sửa thông tin sản phẩm thành công",
   INSUFFICIENT_QUANTITY: "Số lượng sẵn có không đủ!",
-  REVIEW_CART: "Bạn hãy xem lại số lượng sản phẩm trong giỏ hàng, vì có một số sản phẩm đã có người mua!",
+  REVIEW_CART:
+    "Bạn hãy xem lại số lượng sản phẩm trong giỏ hàng, vì có một số sản phẩm đã có người mua!",
   PLEASE_LOGIN: "Vui lòng đăng nhập lại!",
   SUCCESS_STATUS_CHANGE: "Thay đổi trạng thái đơn hàng thành công",
   MISSING_ORDER_CODE: "Vui lòng nhập mã đơn hàng",
@@ -703,11 +735,15 @@ export const MESSAGE = {
   ENTER_DELIVERY_ADDRESS: "Vui lòng nhập địa chỉ giao hàng",
   ENTER_FULL_NAME: "Vui lòng nhập họ tên",
   PLEASE_SELECT_PRODUCT_SIZE: "Vui lòng chọn kích thước sản phẩm",
-  MAXIMUM_UPLOAD_LIMIT_BANNER: "Chỉ được tải lên tối đa " + BANNER.MAX_BANNER_IMAGES + " ảnh.",
-  MAXIMUM_UPLOAD_LIMIT_PRODUCT: "Chỉ được tải lên tối đa " + PRODUCT_DETAILS.MAX_PRODUCT_IMAGES + " ảnh.",
-  MAXIMUM_UPLOAD_LIMIT_SIZE_FIELD: "Chỉ được thêm tối đa " + PRODUCT_DETAILS.MAX_SIZE_FIELDS + " kích cỡ.",
-  PRODUCT_WAS_DELETED: "Sản phẩm đã bị xoá khỏi hệ thống, bạn hãy mua sản phẩm khác",
-}
+  MAXIMUM_UPLOAD_LIMIT_BANNER:
+    "Chỉ được tải lên tối đa " + BANNER.MAX_BANNER_IMAGES + " ảnh.",
+  MAXIMUM_UPLOAD_LIMIT_PRODUCT:
+    "Chỉ được tải lên tối đa " + PRODUCT_DETAILS.MAX_PRODUCT_IMAGES + " ảnh.",
+  MAXIMUM_UPLOAD_LIMIT_SIZE_FIELD:
+    "Chỉ được thêm tối đa " + PRODUCT_DETAILS.MAX_SIZE_FIELDS + " kích cỡ.",
+  PRODUCT_WAS_DELETED:
+    "Sản phẩm đã bị xoá khỏi hệ thống, bạn hãy mua sản phẩm khác",
+};
 
 export const API = {
   PUBLIC: {
@@ -736,8 +772,10 @@ export const API = {
     CANCEL_ORDER_ENDPOINT: "/api/public/orders/cancel-order",
     EDIT_PROFILE_ENDPOINT: "/api/public/edit-profile",
     DELETE_ADDRESS_ENDPOINT: "/api/public/delete-address",
-    GET_ALL_ORDERS_BY_ORDER_STATUS_ENDPOINT: "/api/public/orders/get-all-orders-by-order-status",
-    GET_RANDOM_8_PRODUCTS_ENDPOINT: "/api/public/all-categories/get-random-8-products",
+    GET_ALL_ORDERS_BY_ORDER_STATUS_ENDPOINT:
+      "/api/public/orders/get-all-orders-by-order-status",
+    GET_RANDOM_8_PRODUCTS_ENDPOINT:
+      "/api/public/all-categories/get-random-8-products",
     CATEGORY_ENDPOINT: "/api/public/category/",
     PRODUCT_ENDPOINT: "/api/public/product/",
     SEARCH_ENDPOINT: "/api/public/search/",
@@ -762,13 +800,13 @@ export const API = {
     EDIT_PRODUCT_ENDPOINT: "/api/admin/edit-product",
     SET_ORDER_STATUS_ENDPOINT: "/api/admin/orders/set-order-status",
     UPLOAD_CATEGORY_IMAGE_ENDPOINT: "/api/admin/upload-category-image",
-    SEARCH_ORDERS_BY_ORDER_ID_ENDPOINT: "/api/admin/orders/search-orders-by-order-id",
-    SEARCH_ORDERS_BY_RECIPIENT_PHONE_ENDPOINT: "/api/admin/orders/search-orders-by-recipient-phone",
-    SEARCH_ORDERS_BY_ORDER_DATE_ENDPOINT: "/api/admin/orders/search-orders-by-order-date"
-  }
+    SEARCH_ORDERS_BY_ORDER_ID_ENDPOINT:
+      "/api/admin/orders/search-orders-by-order-id",
+    SEARCH_ORDERS_BY_RECIPIENT_PHONE_ENDPOINT:
+      "/api/admin/orders/search-orders-by-recipient-phone",
+    SEARCH_ORDERS_BY_ORDER_DATE_ENDPOINT:
+      "/api/admin/orders/search-orders-by-order-date",
+  },
+};
 
-}
-
-export const URL = {
-
-}
+export const URL = {};

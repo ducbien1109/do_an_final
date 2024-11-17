@@ -1,0 +1,48 @@
+.modal-dialog {
+  max-width: 90vw; /* Modal chiếm 90% chiều rộng của màn hình */
+  margin: auto; /* Đảm bảo modal được canh giữa */
+}
+
+.modal-content {
+  width: 100%;
+  height: auto; /* Cho phép nội dung kéo dài theo chiều dọc */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ cho modal */
+  border-radius: 8px; /* Thêm bo góc cho modal */
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-wrap {
+  width: 100%;
+  max-width: 600px; /* Giới hạn kích thước tối đa của form */
+  padding: 20px; /* Thêm khoảng cách xung quanh form */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%; /* Làm cho input chiếm toàn bộ chiều rộng */
+  padding: 15px; /* Tăng kích thước của các trường input */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+button.btn-login {
+  width: 100%; /* Đặt chiều rộng của nút bằng 100% của form */
+  padding: 15px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button.btn-login:hover {
+  background-color: #0056b3; /* Đổi màu khi hover */
+}

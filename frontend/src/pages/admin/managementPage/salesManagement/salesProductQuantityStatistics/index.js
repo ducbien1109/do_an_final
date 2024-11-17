@@ -12,12 +12,19 @@ import {
   SALES_PRODUCT_QUANTITY_STATISTICS_PAGE, SELECT
 } from "@Const";
 import { ConfigProvider, Select } from "antd";
+// Hàm tính tổng tiền
+
 
 const SalesProductQuantityStatisticsPage = () => {
   const [productsData, setProductsData] = useState([]);
   const [searchInputValue, setSearchInputValue] = useState("");
   const [productDisplayQuantity, setProductDisplayQuantity] = useState(SELECT.DISPLAY_QUANTITY.VALUE.FIVE);
 
+  const calculateTotalRevenue = () => {
+    return productsData.reduce((total, product) => {
+      return total + (product.productPrice * (product.quantitySold || 0));
+    }, 0);
+  }
   const fetchAllProduct = async () => {
     try {
       const response = await fetch(API.PUBLIC.GET_ALL_PRODUCTS, {
@@ -83,11 +90,14 @@ const SalesProductQuantityStatisticsPage = () => {
 
   const ListProductSection = () => {
     return (
-      <section>
+      <section> 
+        <div>Tổng doanh thu: {calculateTotalRevenue().toLocaleString()} VND</div>
+
         <div style={{
           boxShadow: "1px 1px 4px 0 rgba(0, 0, 0, 0.102)", overflow: "hidden",
           borderRadius: "3px", border: "1px solid #E4E4E4", padding: "0", backgroundColor: "#FAFAFA"
         }}>
+          
           <div>
             {
               productsData &&
@@ -96,7 +106,7 @@ const SalesProductQuantityStatisticsPage = () => {
                   <div className={"product-field"} style={{ justifyContent: "flex-start" }}>
                     <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", width: "60%", height: "100%" }}>
                       <div style={{ alignSelf: "flex-start", width: "25px", height: "100%", borderRight: "3px" }} />
-
+                      
                       <div style={{ borderRadius: "100%", border: "3px solid #a68242", padding: "2px" }}>
                         <img
                           className="img-subCategory"

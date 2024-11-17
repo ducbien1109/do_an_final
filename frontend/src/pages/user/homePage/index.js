@@ -6,6 +6,7 @@ import CollectionSection from "./CollectionSection/CollectionSection";
 import {toast} from "react-toastify";
 import {ScrollToTop} from '@Utils';
 import {API, MESSAGE} from "@Const";
+import Mess from '../../../components/buttons/mess/Mess';
 
 const HomePage = () => {
   const [collections, setCollections] = useState([]);
@@ -44,7 +45,7 @@ const HomePage = () => {
             ))
           }
         </section>
-
+          <Mess/>
       </main>
   );
 }

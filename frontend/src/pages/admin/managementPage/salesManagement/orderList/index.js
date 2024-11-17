@@ -1,105 +1,255 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import jsPDF from "jspdf";
 
 import EditOrderStatusDialog from "./dialogs/EditOrderStatusDialog/EditOrderStatusDialog";
-import { convertDateTimeFormat } from '@Utils';
+import { convertDateTimeFormat } from "@Utils";
 import { formatter } from "@Utils/formatter";
 
 import { TbListSearch } from "react-icons/tb";
 import { BiSolidEdit } from "react-icons/bi";
 
-import { DatePicker } from 'antd';
+import { DatePicker } from "antd";
 import { ConfigProvider, Select } from "antd";
-import locale from 'antd/locale/vi_VN';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-import localeData from 'dayjs/plugin/localeData'
-import weekday from 'dayjs/plugin/weekday'
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-import weekYear from 'dayjs/plugin/weekYear'
-import viLocale from 'dayjs/locale/vi';
+import locale from "antd/locale/vi_VN";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import localeData from "dayjs/plugin/localeData";
+import weekday from "dayjs/plugin/weekday";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import weekYear from "dayjs/plugin/weekYear";
+import viLocale from "dayjs/locale/vi";
+import { Bar } from "react-chartjs-2";
 import {
-  API, BREADCRUMB,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Đăng ký các thành phần cần thiết cho biểu đồ
+
+import {
+  API,
+  BREADCRUMB,
   DATE_PICKER,
   IMAGE_URL,
   MESSAGE,
-  ORDER_LIST_PAGE, SEARCH,
+  ORDER_LIST_PAGE,
+  SEARCH,
   TAB_LIST_ITEMS,
-  TAB_LIST_TEXT
+  TAB_LIST_TEXT,
 } from "@Const";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const { RangePicker } = DatePicker;
 
 const TabList = ({ openTab, setOpenTab }) => {
   return (
-    <div className="nav nav-tabs menu-tab" id="myTab" role="tablist"
-      style={{ boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.102)", borderRadius: "3px" }}
+    <div
+      className="nav nav-tabs menu-tab"
+      id="myTab"
+      role="tablist"
+      style={{
+        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.102)",
+        borderRadius: "3px",
+      }}
     >
-      {
-        TAB_LIST_ITEMS.map((tab, index) => (
-          <button
-            key={tab.text}
-            className={`nav-link ${openTab === tab.text ? "active" : ""}`}
-            style={{ marginBottom: "0px" }}
-            role="tab"
-            tabIndex={(openTab === tab.text) ? 0 : -1}
-            onClick={() => setOpenTab(tab.text)}
-          >
-            {tab.text}
-          </button>
-        ))
-      }
+      {TAB_LIST_ITEMS.map((tab, index) => (
+        <button
+          key={tab.text}
+          className={`nav-link ${openTab === tab.text ? "active" : ""}`}
+          style={{ marginBottom: "0px" }}
+          role="tab"
+          tabIndex={openTab === tab.text ? 0 : -1}
+          onClick={() => setOpenTab(tab.text)}
+        >
+          {tab.text}
+        </button>
+      ))}
     </div>
   );
-}
+};
 
-const TabContent = ({ openTab, setOpenTab, orderList, reloadOrderListPage }) => {
+const TabContent = ({
+  openTab,
+  setOpenTab,
+  orderList,
+  reloadOrderListPage,
+}) => {
   const [editingOrderStatus, setEditingOrderStatus] = useState(null);
+  const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+  const handleDateRangeChange = (dates) => {
+    setSelectedDateRange(dates);
+  };
 
   const navigate = useNavigate();
 
   const handleAcceptEditOrderStatus = () => {
     reloadOrderListPage();
     setEditingOrderStatus(null);
+  };
+
+  const revenueData = [
+    { month: "Tháng 1", revenue: 0 },
+    { month: "Tháng 2", revenue: 0 },
+    { month: "Tháng 3", revenue: 0 },
+    { month: "Tháng 4", revenue: 0 },
+    { month: "Tháng 5", revenue: 0 },
+    { month: "Tháng 6", revenue: 0 },
+    { month: "Tháng 7", revenue: 0 },
+    { month: "Tháng 8", revenue: 0 },
+    { month: "Tháng 9", revenue: 0 },
+    { month: "Tháng 10", revenue: 0 },
+    { month: "Tháng 11", revenue: 0 },
+    { month: "Tháng 12", revenue: 0 },
+  ];
+
+  const calculateTotalRevenue = (orders) => {
+    const revenueMap = {};
+    orders.forEach((order) => {
+      if (order.orderStatus === TAB_LIST_TEXT.COMPLETED) {
+        const orderDate = new Date(order.orderDate);
+        const month = orderDate.getMonth();
+        if (order.orderDetails) {
+          order.orderDetails.forEach((orderDetail) => {
+            if (orderDetail.totalPrice) {
+              if (revenueMap[month]) {
+                revenueMap[month] += orderDetail.totalPrice;
+              } else {
+                revenueMap[month] = orderDetail.totalPrice;
+              }
+            }
+          });
+        }
+      }
+    });
+
+    // Cập nhật lại doanh thu cho từng tháng trong `revenueData`
+    return revenueData.map((item, index) => ({
+      month: item.month,
+      revenue: revenueMap[index] || 0, // Nếu không có doanh thu cho tháng, mặc định là 0
+    }));
+  };
+
+  // Tính tổng doanh thu từ `orderList`
+  const updatedRevenueData = calculateTotalRevenue(orderList);
+
+  const labels = updatedRevenueData.map((item) => item.month);
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Tổng doanh thu (triệu VND)",
+        data: updatedRevenueData.map((item) => item.revenue),
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Tổng doanh thu theo từng tháng",
+      },
+    },
+  };
+
+  if (openTab === TAB_LIST_TEXT.Total) {
+    return (
+      <div style={{ width: "600px", margin: "auto" }}>
+        <h1>Biểu đồ Tổng Doanh Thu</h1>
+        <Bar data={data} options={options} />
+      </div>
+    );
   }
 
   return (
     <>
-      {orderList && orderList.filter((order) => openTab === TAB_LIST_TEXT.ALL || order.orderStatus === openTab).length ?
+      {orderList &&
+      orderList.filter(
+        (order) =>
+          openTab === TAB_LIST_TEXT.ALL || order.orderStatus === openTab
+      ).length ? (
         <>
           {orderList.map((order, index) => (
             <div key={index}>
-              {(openTab === TAB_LIST_TEXT.ALL || order.orderStatus === openTab) &&
-                <div key={index}
+              <div className="App">
+                <ul></ul>
+              </div>
+              {(openTab === TAB_LIST_TEXT.ALL ||
+                order.orderStatus === openTab) && (
+                <div
+                  key={index}
                   className="order-item-wrap show-detail"
-                  style={{ boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.102)", borderRadius: "3px" }}
+                  style={{
+                    boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.102)",
+                    borderRadius: "3px",
+                  }}
                 >
-                  <div className="header-wrap" style={{ padding: "10px 17px 10px 17px" }}>
-                    <div className="code-wrap" style={{ display: "flex", alignItems: "center" }}>
-                      <span>{ORDER_LIST_PAGE.ORDER_ID} <span className="code">{order.orderID}</span> </span>
-                    </div>
-                    <div className="avatar-hover pointer-cursor"
+                  <div
+                    className="header-wrap"
+                    style={{ padding: "10px 17px 10px 17px" }}
+                  >
+                    <div
+                      className="code-wrap"
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Link to={`/profile/orders?userID=${order.userID}`}>{order.fullName}</Link>
-                      <div style={{ marginLeft: "10px", border: "1px solid #F5F5F5", borderRadius: "100%" }}>
+                      <span>
+                        {ORDER_LIST_PAGE.ORDER_ID}{" "}
+                        <span className="code">{order.orderID}</span>{" "}
+                      </span>
+                    </div>
+                    <div
+                      className="avatar-hover pointer-cursor"
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <Link to={`/profile/orders?userID=${order.userID}`}>
+                        {order.fullName}
+                      </Link>
+                      <div
+                        style={{
+                          marginLeft: "10px",
+                          border: "1px solid #F5F5F5",
+                          borderRadius: "100%",
+                        }}
+                      >
                         <img
                           className="img-avatar"
-                          src={order.avatarPath ? order.avatarPath : IMAGE_URL.DEFAULT_AVATAR_IMG}
+                          src={
+                            order.avatarPath
+                              ? order.avatarPath
+                              : IMAGE_URL.DEFAULT_AVATAR_IMG
+                          }
                           alt=""
                           onClick={() => {
-                            navigate(`/profile/orders?userID=${order.userID}`)
+                            navigate(`/profile/orders?userID=${order.userID}`);
                           }}
                         />
                       </div>
                     </div>
                   </div>
-
                   <div className="content-wrap">
                     {order.orderDetails &&
                       order.orderDetails.map((orderDetail, index) => (
@@ -107,67 +257,106 @@ const TabContent = ({ openTab, setOpenTab, orderList, reloadOrderListPage }) => 
                           <div className="img-wrap">
                             <img
                               src={orderDetail.imagePath}
-                              alt={orderDetail.productName} />
+                              alt={orderDetail.productName}
+                            />
                           </div>
                           <div className="info-wrap">
-                            <Link to={"/product?productID=" + orderDetail.productID}>
-                              <div className="name">{orderDetail.productName}</div>
+                            <Link
+                              to={"/product?productID=" + orderDetail.productID}
+                            >
+                              <div className="name">
+                                {orderDetail.productName}
+                              </div>
                             </Link>
                             <div className="property-wrap">
-                              <span>{ORDER_LIST_PAGE.SIZE} {orderDetail.sizeName}</span>
+                              <span>
+                                {ORDER_LIST_PAGE.SIZE} {orderDetail.sizeName}
+                              </span>
                             </div>
                             <div className="property-wrap">
-                              <span>{ORDER_LIST_PAGE.QUANTITY} {orderDetail.quantity}</span>
+                              <span>
+                                {ORDER_LIST_PAGE.QUANTITY}{" "}
+                                {orderDetail.quantity}
+                              </span>
                             </div>
                             <div className="money-wrap">
                               <span>{formatter(orderDetail.totalPrice)}</span>
                             </div>
                           </div>
                         </div>
-                      ))
-                    }
-
+                      ))}
                   </div>
                   <div className="total-wrap">
                     <div className="total-money">
                       {ORDER_LIST_PAGE.TOTAL_AMOUNT}
-                      <span className="money">&nbsp; {formatter(order.totalAmount)}</span>
+                      <span className="money">
+                        &nbsp; {formatter(order.totalAmount)}
+                      </span>
                     </div>
 
-                    <div className="header-wrap" style={{ borderBottom: "0", padding: "7px 0 7px 0" }}>
+                    <div
+                      className="header-wrap"
+                      style={{ borderBottom: "0", padding: "7px 0 7px 0" }}
+                    >
                       <div className="status-wrap">
-                        <p className="date">{convertDateTimeFormat(order.orderDate)}</p>
+                        <p className="date">
+                          {convertDateTimeFormat(order.orderDate)}
+                        </p>
 
                         <div style={{ display: "flex", alignItems: "center" }}>
-
-                          {order.orderStatus === TAB_LIST_TEXT.PENDING_CONFIRMATION &&
-                            <div className="status status-un-paid"
+                          {order.orderStatus ===
+                            TAB_LIST_TEXT.PENDING_CONFIRMATION && (
+                            <div
+                              className="status status-un-paid"
                               style={{ backgroundColor: "#ffe39d" }}
-                            >{order.orderStatus}</div>
-                          }
-                          {order.orderStatus === TAB_LIST_TEXT.CONFIRMED &&
-                            <div className="status status-un-paid"
+                            >
+                              {order.orderStatus}
+                            </div>
+                          )}
+                          {order.orderStatus === TAB_LIST_TEXT.CONFIRMED && (
+                            <div
+                              className="status status-un-paid"
                               style={{ backgroundColor: "#b5efa3" }}
-                            >{order.orderStatus}</div>
-                          }
-                          {order.orderStatus === TAB_LIST_TEXT.IN_TRANSIT &&
-                            <div className="status status-un-paid"
+                            >
+                              {order.orderStatus}
+                            </div>
+                          )}
+                          {order.orderStatus === TAB_LIST_TEXT.IN_TRANSIT && (
+                            <div
+                              className="status status-un-paid"
                               style={{ backgroundColor: "#baf6f8" }}
-                            >{order.orderStatus}</div>
-                          }
-                          {order.orderStatus === TAB_LIST_TEXT.COMPLETED &&
-                            <div className="status status-un-paid"
+                            >
+                              {order.orderStatus}
+                            </div>
+                          )}
+                          {order.orderStatus === TAB_LIST_TEXT.COMPLETED && (
+                            <div
+                              className="status status-un-paid"
                               style={{ backgroundColor: "#2fad0c" }}
-                            ><span style={{ color: "white" }}>{order.orderStatus}</span></div>
-                          }
-                          {order.orderStatus === TAB_LIST_TEXT.CANCELLED &&
-                            <div className="status status-un-paid"
+                            >
+                              <span style={{ color: "white" }}>
+                                {order.orderStatus}
+                              </span>
+                            </div>
+                          )}
+                          {order.orderStatus === TAB_LIST_TEXT.CANCELLED && (
+                            <div
+                              className="status status-un-paid"
                               style={{ backgroundColor: "#a68242" }}
-                            ><span style={{ color: "white" }}>{order.orderStatus}</span></div>
-                          }
+                            >
+                              <span style={{ color: "white" }}>
+                                {order.orderStatus}
+                              </span>
+                            </div>
+                          )}
 
-
-                          <BiSolidEdit style={{ fontSize: "21px", color: "#7B7D85", marginLeft: "7px", cursor: "pointer" }}
+                          <BiSolidEdit
+                            style={{
+                              fontSize: "21px",
+                              color: "#7B7D85",
+                              marginLeft: "7px",
+                              cursor: "pointer",
+                            }}
                             onClick={() => {
                               setEditingOrderStatus({
                                 orderID: order.orderID,
@@ -176,33 +365,46 @@ const TabContent = ({ openTab, setOpenTab, orderList, reloadOrderListPage }) => 
                             }}
                           />
                         </div>
-
                       </div>
                     </div>
-
                   </div>
                   <div className="detail-wrap show-detail">
                     <div className="content-detail-wrap">
                       <div className="info-order-wrap">
                         <div className="row item-info">
-                          <div className="col-3 label-wrap">{ORDER_LIST_PAGE.PAYMENT_METHOD_LABEL}</div>
-                          {order.payment === 'Thanh toán online' ? (
+                          <div className="col-3 label-wrap">
+                            {ORDER_LIST_PAGE.PAYMENT_METHOD_LABEL}
+                          </div>
+                          {order.payment === "Thanh toán online" ? (
                             <>
-                              <div className="col-9 text-wrap" style={{ color: "#2fad0c", fontWeight: "bold" }}>{ORDER_LIST_PAGE.PAYMENT_METHOD_ONLINE}</div>
+                              <div
+                                className="col-9 text-wrap"
+                                style={{ color: "#2fad0c", fontWeight: "bold" }}
+                              >
+                                {ORDER_LIST_PAGE.PAYMENT_METHOD_ONLINE}
+                              </div>
                             </>
                           ) : (
                             <>
-                              <div className="col-9 text-wrap">{ORDER_LIST_PAGE.PAYMENT_METHOD}</div>
+                              <div className="col-9 text-wrap">
+                                {ORDER_LIST_PAGE.PAYMENT_METHOD}
+                              </div>
                             </>
                           )}
                         </div>
                         <div className="row item-info">
-                          <div className="col-3 label-wrap">{ORDER_LIST_PAGE.SHIPPING_ADDRESS_LABEL}</div>
+                          <div className="col-3 label-wrap">
+                            {ORDER_LIST_PAGE.SHIPPING_ADDRESS_LABEL}
+                          </div>
                           <div className="col-9 text-wrap">
                             <div className="information">
-                              <span className="name">{order.recipientName}</span>
+                              <span className="name">
+                                {order.recipientName}
+                              </span>
                               <div className="break-item">|</div>
-                              <span className="phone">{order.recipientPhone}</span>
+                              <span className="phone">
+                                {order.recipientPhone}
+                              </span>
                             </div>
                             <div>
                               <span>{order.addressDetails}</span>
@@ -213,39 +415,52 @@ const TabContent = ({ openTab, setOpenTab, orderList, reloadOrderListPage }) => 
                     </div>
                   </div>
                 </div>
-              }
+              )}
             </div>
           ))}
           {editingOrderStatus && (
             <div className="modal-overlay">
-              <EditOrderStatusDialog orderID={editingOrderStatus.orderID}
+              <EditOrderStatusDialog
+                orderID={editingOrderStatus.orderID}
                 orderStatus={editingOrderStatus.orderStatus}
                 onAccept={handleAcceptEditOrderStatus}
-                onClose={() => { setEditingOrderStatus(null) }} />
+                onClose={() => {
+                  setEditingOrderStatus(null);
+                }}
+              />
             </div>
           )}
         </>
-        :
-        <div className={`tab-pane show`} role="tabpanel" style={{ boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.102)", borderRadius: "3px" }}>
+      ) : (
+        <div
+          className={`tab-pane show`}
+          role="tabpanel"
+          style={{
+            boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.102)",
+            borderRadius: "3px",
+          }}
+        >
           <div className="empty-content">
             <img src={IMAGE_URL.EMPTY_PRODUCT_IMG} alt="no data" />
             <p>{ORDER_LIST_PAGE.NO_ORDERS}</p>
           </div>
         </div>
-      }
+      )}
     </>
   );
-}
+};
 
 const OrderListPage = () => {
-  const [cookies] = useCookies(['access_token']);
+  const [cookies] = useCookies(["access_token"]);
   const accessToken = cookies.access_token;
 
   const [isStart, setIsStart] = useState(true);
 
-  const [orderList, setOrderList] = useState([])
+  const [orderList, setOrderList] = useState([]);
   const [openTab, setOpenTab] = useState(TAB_LIST_TEXT.ALL);
-  const [selectedSearch, setSelectedSearch] = useState(SEARCH.ORDER.VALUE.ORDER_DATE);
+  const [selectedSearch, setSelectedSearch] = useState(
+    SEARCH.ORDER.VALUE.ORDER_DATE
+  );
   const [phoneNumberValue, setPhoneNumberValue] = useState("");
   const [orderIDValue, setOrderIDValue] = useState("");
 
@@ -256,8 +471,12 @@ const OrderListPage = () => {
     if (!dates) {
       return false;
     }
-    const tooLate = dates[0] && current.diff(dates[0], 'days') >= DATE_PICKER.MAX_DAY_DISTANCE;
-    const tooEarly = dates[1] && dates[1].diff(current, 'days') >= DATE_PICKER.MAX_DAY_DISTANCE;
+    const tooLate =
+      dates[0] &&
+      current.diff(dates[0], "days") >= DATE_PICKER.MAX_DAY_DISTANCE;
+    const tooEarly =
+      dates[1] &&
+      dates[1].diff(current, "days") >= DATE_PICKER.MAX_DAY_DISTANCE;
     return !!tooEarly || !!tooLate;
   };
 
@@ -267,7 +486,7 @@ const OrderListPage = () => {
     } else {
       setDates(null);
     }
-  }
+  };
 
   const fetchOrdersByOrderId = async () => {
     if (!orderIDValue) {
@@ -276,16 +495,19 @@ const OrderListPage = () => {
     }
 
     const formData = new FormData();
-    formData.append('orderID', orderIDValue);
+    formData.append("orderID", orderIDValue);
 
     try {
-      const response = await fetch(API.ADMIN.SEARCH_ORDERS_BY_ORDER_ID_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        API.ADMIN.SEARCH_ORDERS_BY_ORDER_ID_ENDPOINT,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: formData,
+        }
+      );
       if (response.status === 200) {
         const data = await response.json();
         // console.log(data);
@@ -299,7 +521,7 @@ const OrderListPage = () => {
       console.log(error);
       toast.error(MESSAGE.DB_CONNECTION_ERROR);
     }
-  }
+  };
 
   const fetchOrdersByRecipientPhone = async () => {
     if (!phoneNumberValue) {
@@ -308,16 +530,19 @@ const OrderListPage = () => {
     }
 
     const formData = new FormData();
-    formData.append('recipientPhone', phoneNumberValue);
+    formData.append("recipientPhone", phoneNumberValue);
 
     try {
-      const response = await fetch(API.ADMIN.SEARCH_ORDERS_BY_RECIPIENT_PHONE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        API.ADMIN.SEARCH_ORDERS_BY_RECIPIENT_PHONE_ENDPOINT,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: formData,
+        }
+      );
       if (response.status === 200) {
         const data = await response.json();
         setOrderList(data);
@@ -330,7 +555,7 @@ const OrderListPage = () => {
       console.log(error);
       toast.error(MESSAGE.DB_CONNECTION_ERROR);
     }
-  }
+  };
 
   const fetchOrdersByOrderDate = async () => {
     if (!value) {
@@ -342,8 +567,8 @@ const OrderListPage = () => {
       return;
     }
 
-    const startOrderDate = value[0].format('YYYY-MM-DD');
-    const endOrderDate = value[1].format('YYYY-MM-DD');
+    const startOrderDate = value[0].format("YYYY-MM-DD");
+    const endOrderDate = value[1].format("YYYY-MM-DD");
 
     if (!startOrderDate || !endOrderDate) {
       toast.error(MESSAGE.GENERIC_ERROR);
@@ -351,17 +576,19 @@ const OrderListPage = () => {
     }
 
     const formData = new FormData();
-    formData.append('startOrderDate', startOrderDate);
-    formData.append('endOrderDate', endOrderDate);
-
+    formData.append("startOrderDate", startOrderDate);
+    formData.append("endOrderDate", endOrderDate);
     try {
-      const response = await fetch(API.ADMIN.SEARCH_ORDERS_BY_ORDER_DATE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        API.ADMIN.SEARCH_ORDERS_BY_ORDER_DATE_ENDPOINT,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: formData,
+        }
+      );
       if (response.status === 200) {
         const data = await response.json();
         // console.log(data);
@@ -375,21 +602,21 @@ const OrderListPage = () => {
       console.log(error);
       toast.error(MESSAGE.DB_CONNECTION_ERROR);
     }
-  }
+  };
 
   const handleBtnSearchClick = () => {
     switch (selectedSearch) {
       case SEARCH.ORDER.VALUE.ORDER_DATE:
-        fetchOrdersByOrderDate().then(r => { });
+        fetchOrdersByOrderDate().then((r) => {});
         break;
       case SEARCH.ORDER.VALUE.PHONE_NUMBER:
-        fetchOrdersByRecipientPhone().then(r => { });
+        fetchOrdersByRecipientPhone().then((r) => {});
         break;
       case SEARCH.ORDER.VALUE.ORDER_ID:
-        fetchOrdersByOrderId().then(r => { });
+        fetchOrdersByOrderId().then((r) => {});
         break;
     }
-  }
+  };
 
   const reloadOrderListPage = async () => {
     setIsStart(true);
@@ -400,15 +627,15 @@ const OrderListPage = () => {
 
     const currentDate = new Date();
     setValue([dayjs(currentDate), dayjs(currentDate)]);
-  }
+  };
 
   useEffect(() => {
-    dayjs.extend(customParseFormat)
-    dayjs.extend(advancedFormat)
-    dayjs.extend(weekday)
-    dayjs.extend(localeData)
-    dayjs.extend(weekOfYear)
-    dayjs.extend(weekYear)
+    dayjs.extend(customParseFormat);
+    dayjs.extend(advancedFormat);
+    dayjs.extend(weekday);
+    dayjs.extend(localeData);
+    dayjs.extend(weekOfYear);
+    dayjs.extend(weekYear);
     dayjs.locale(viLocale);
 
     const currentDate = new Date();
@@ -418,7 +645,7 @@ const OrderListPage = () => {
   useEffect(() => {
     if (value && isStart) {
       setIsStart(false);
-      fetchOrdersByOrderDate().then(r => { });
+      fetchOrdersByOrderDate().then((r) => {});
     }
   }, [value]);
 
@@ -434,20 +661,48 @@ const OrderListPage = () => {
         </div>
 
         <div style={{ padding: "0 47px 0 47px", width: "100%" }}>
-          <div style={{
-            boxShadow: "0px 1px 4px 0 rgba(0, 0, 0, 0.102)", marginBottom: "10px",
-            borderRadius: "3px", padding: "0", backgroundColor: "#fff", height: "75px"
-          }}
+          <div
+            style={{
+              boxShadow: "0px 1px 4px 0 rgba(0, 0, 0, 0.102)",
+              marginBottom: "10px",
+              borderRadius: "3px",
+              padding: "0",
+              backgroundColor: "#fff",
+              height: "75px",
+            }}
           >
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "100%", paddingLeft: "35px" }}>
-              <div style={{ display: "flex", color: "#333333", fontSize: "18px", fontWeight: "800", marginTop: "7px", alignItems: "center" }}>
-                <TbListSearch style={{ padding: "0 0 2px", fontSize: "28px", marginRight: "10px" }} />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                height: "100%",
+                paddingLeft: "35px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  color: "#333333",
+                  fontSize: "18px",
+                  fontWeight: "800",
+                  marginTop: "7px",
+                  alignItems: "center",
+                }}
+              >
+                <TbListSearch
+                  style={{
+                    padding: "0 0 2px",
+                    fontSize: "28px",
+                    marginRight: "10px",
+                  }}
+                />
                 <span>{ORDER_LIST_PAGE.SEARCH_BY}</span>
                 <ConfigProvider
                   theme={{
                     components: {
                       Select: {
-                        controlItemBgActive: '#ffe6e6',
+                        controlItemBgActive: "#ffe6e6",
                       },
                     },
                   }}
@@ -458,9 +713,18 @@ const OrderListPage = () => {
                     bordered={false}
                     size={"large"}
                     options={[
-                      { value: SEARCH.ORDER.VALUE.ORDER_DATE, label: SEARCH.ORDER.LABEL.ORDER_DATE },
-                      { value: SEARCH.ORDER.VALUE.PHONE_NUMBER, label: SEARCH.ORDER.LABEL.PHONE_NUMBER },
-                      { value: SEARCH.ORDER.VALUE.ORDER_ID, label: SEARCH.ORDER.LABEL.ORDER_ID },
+                      {
+                        value: SEARCH.ORDER.VALUE.ORDER_DATE,
+                        label: SEARCH.ORDER.LABEL.ORDER_DATE,
+                      },
+                      {
+                        value: SEARCH.ORDER.VALUE.PHONE_NUMBER,
+                        label: SEARCH.ORDER.LABEL.PHONE_NUMBER,
+                      },
+                      {
+                        value: SEARCH.ORDER.VALUE.ORDER_ID,
+                        label: SEARCH.ORDER.LABEL.ORDER_ID,
+                      },
                     ]}
                     onChange={(value) => {
                       setSelectedSearch(value);
@@ -470,34 +734,47 @@ const OrderListPage = () => {
                     }}
                   />
                 </ConfigProvider>
-
               </div>
 
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginRight: "35px" }}>
-                <div style={{ display: "flex", alignItems: "center", height: "35px", width: "400px" }}>
-                  {selectedSearch === SEARCH.ORDER.VALUE.ORDER_DATE &&
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginRight: "35px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: "35px",
+                    width: "400px",
+                  }}
+                >
+                  {selectedSearch === SEARCH.ORDER.VALUE.ORDER_DATE && (
                     <ConfigProvider
                       locale={locale}
                       theme={{
                         components: {
                           DatePicker: {
-                            hoverBorderColor: '#B7B7B7',
-                            activeBorderColor: '#d98c8c',
-                            colorPrimary: '#c94a4a',
-                            colorPrimaryBorder: '#d98c8c',
-                            controlItemBgActive: '#ffe6e6',
-                            activeShadow: 'none',
-                            colorBorder: '#E5E5E5',
-                            borderRadius: '3px',
-                            fontSize: '14',
-                            fontSizeLG: '14',
-                            colorTextPlaceholder: '#B7B7B7',
+                            hoverBorderColor: "#B7B7B7",
+                            activeBorderColor: "#d98c8c",
+                            colorPrimary: "#c94a4a",
+                            colorPrimaryBorder: "#d98c8c",
+                            controlItemBgActive: "#ffe6e6",
+                            activeShadow: "none",
+                            colorBorder: "#E5E5E5",
+                            borderRadius: "3px",
+                            fontSize: "14",
+                            fontSizeLG: "14",
+                            colorTextPlaceholder: "#B7B7B7",
                           },
                           Button: {
-                            colorPrimary: '#a68242',
-                            colorPrimaryHover: '#dc3636',
-                            colorPrimaryActive: '#b20a0a',
-                            primaryShadow: '0 2px 0 #ffe6e6',
+                            colorPrimary: "#a68242",
+                            colorPrimaryHover: "#dc3636",
+                            colorPrimaryActive: "#b20a0a",
+                            primaryShadow: "0 2px 0 #ffe6e6",
                           },
                         },
                       }}
@@ -518,53 +795,84 @@ const OrderListPage = () => {
                         changeOnBlur
                       />
                     </ConfigProvider>
-                  }
-                  {selectedSearch === SEARCH.ORDER.VALUE.PHONE_NUMBER &&
-                    <div style={{ padding: "0", width: "100%", height: "35px", display: "flex", alignItems: "center" }}
+                  )}
+                  {selectedSearch === SEARCH.ORDER.VALUE.PHONE_NUMBER && (
+                    <div
+                      style={{
+                        padding: "0",
+                        width: "100%",
+                        height: "35px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
                       className="fashion-store-input__inner "
                     >
                       <input
-                        type="text" placeholder={ORDER_LIST_PAGE.PHONE_NUMBER_PLACEHOLDER}
-                        style={{ padding: "0 12px 0 12px", borderRadius: "3px" }}
+                        type="text"
+                        placeholder={ORDER_LIST_PAGE.PHONE_NUMBER_PLACEHOLDER}
+                        style={{
+                          padding: "0 12px 0 12px",
+                          borderRadius: "3px",
+                        }}
                         className="fashion-store-input__input"
                         value={phoneNumberValue}
                         onChange={(e) => {
-                          if (!isNaN(e.target.value)) setPhoneNumberValue(e.target.value);
+                          if (!isNaN(e.target.value))
+                            setPhoneNumberValue(e.target.value);
                         }}
                       />
                     </div>
-                  }
-                  {selectedSearch === SEARCH.ORDER.VALUE.ORDER_ID &&
-                    <div style={{ padding: "0", width: "100%", height: "35px", display: "flex", alignItems: "center" }}
+                  )}
+                  {selectedSearch === SEARCH.ORDER.VALUE.ORDER_ID && (
+                    <div
+                      style={{
+                        padding: "0",
+                        width: "100%",
+                        height: "35px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
                       className="fashion-store-input__inner "
                     >
                       <input
-                        type="text" placeholder={ORDER_LIST_PAGE.ORDER_ID_PLACEHOLDER}
-                        style={{ padding: "0 12px 0 12px", borderRadius: "3px" }}
+                        type="text"
+                        placeholder={ORDER_LIST_PAGE.ORDER_ID_PLACEHOLDER}
+                        style={{
+                          padding: "0 12px 0 12px",
+                          borderRadius: "3px",
+                        }}
                         className="fashion-store-input__input"
                         value={orderIDValue}
                         onChange={(e) => {
-                          if (!isNaN(e.target.value)) setOrderIDValue(e.target.value);
+                          if (!isNaN(e.target.value))
+                            setOrderIDValue(e.target.value);
                         }}
                       />
                     </div>
-                  }
+                  )}
                 </div>
-                <button type="button" className="search-btn" onClick={handleBtnSearchClick}>{ORDER_LIST_PAGE.SEARCH_BTN}</button>
+                <button
+                  type="button"
+                  className="search-btn"
+                  onClick={handleBtnSearchClick}
+                >
+                  {ORDER_LIST_PAGE.SEARCH_BTN}
+                </button>
               </div>
-
             </div>
           </div>
         </div>
 
-        <div className="col-8 content-children item-row"
+        <div
+          className="col-8 content-children item-row"
           style={{ padding: "0 47px 0 47px", width: "100%" }}
         >
           <div className="order-wrap">
             <TabList openTab={openTab} setOpenTab={setOpenTab} />
             <div className="order-list">
               <div className="tab-content clearfix" id="nav-tabContent">
-                <TabContent openTab={openTab}
+                <TabContent
+                  openTab={openTab}
                   setOpenTab={setOpenTab}
                   orderList={orderList}
                   reloadOrderListPage={reloadOrderListPage}
@@ -573,7 +881,6 @@ const OrderListPage = () => {
             </div>
           </div>
         </div>
-
       </main>
     </div>
   );
